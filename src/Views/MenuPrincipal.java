@@ -1,5 +1,4 @@
-package Vista;
-import Modelos.Cliente;
+package Views;
 import Services.ClienteService;
 import java.util.HashMap;
 import java.util.Scanner;

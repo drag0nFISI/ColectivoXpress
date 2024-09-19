@@ -1,4 +1,4 @@
-package Modelos;
+package Models;
 
 import java.util.Objects;
 //EL OBJETO CLIENTE COMO TAL

@@ -1,6 +1,6 @@
 package Services;
-import Modelos.Cliente;
-import Datos.ClientesData;
+import Models.Cliente;
+import Repository.ClientesData;
 import java.util.Scanner;
 import java.util.HashMap;
 
