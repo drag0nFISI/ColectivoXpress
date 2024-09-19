@@ -1,0 +1,20 @@
+[
+  {
+    "nombres": "1",
+    "apellidos": "2",
+    "telefono": "3",
+    "dni": "4",
+    "distrito": "6",
+    "fecha_nacimiento": "5",
+    "numero_viajes": 0
+  },
+  {
+    "nombres": "a",
+    "apellidos": "b",
+    "telefono": "c",
+    "dni": "d",
+    "distrito": "f",
+    "fecha_nacimiento": "e",
+    "numero_viajes": 0
+  }
+]

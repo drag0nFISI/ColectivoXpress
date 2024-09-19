@@ -1,37 +1,28 @@
 package Services;
 import Modelos.Cliente;
+import Datos.ClientesData;
 import java.util.Scanner;
+import java.util.HashMap;
+
 
 public class ClienteService {
     //todas las cosas que podemos hacer sobre los clientes, es un gestor de los clientes
     static Scanner sc = new Scanner(System.in);
 
-    public Cliente registro_cliente(){
-        String nombres;
-        String apellidos;
-        String telefono;
-        String dni;
-        String distrito;
-        String fecha_nacimiento;
-
-        System.out.println("Ingrese su nombre: ");
-        nombres = sc.nextLine();
-        System.out.println("Ingrese sus apellidos: ");
-        apellidos = sc.nextLine();
-        System.out.println("Ingrese su telefono: ");
-        telefono = sc.nextLine();
-        System.out.println("Ingrese su dni: ");
-        dni = sc.nextLine();
-        System.out.println("Ingrese su distrito: ");
-        distrito = sc.nextLine();
-        System.out.println("Ingrese su fecha de nacimiento: ");
-        fecha_nacimiento = sc.nextLine();
+    public void registro_cliente(HashMap<String, String> datos){
+        String nombres = datos.get("nombres");
+        String apellidos = datos.get("apellidos");
+        String telefono = datos.get("telefono");
+        String dni = datos.get("dni");
+        String distrito = datos.get("distrito");
+        String fecha_nacimiento = datos.get("fecha_nacimiento");
 
         Cliente nuevo_cliente = new Cliente(
-                nombres, apellidos, telefono, dni, distrito, fecha_nacimiento
+                nombres, apellidos, telefono, dni, fecha_nacimiento, distrito
         );
 
-        return nuevo_cliente;
+        ClientesData cd = new ClientesData();
+        cd.guardar_cliente(nuevo_cliente);
     }
 
     public void mostrar_perfil(Cliente cliente){
