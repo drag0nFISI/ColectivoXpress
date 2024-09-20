@@ -1,0 +1,32 @@
+[
+  {
+    "nombres": "a",
+    "apellidos": "b",
+    "telefono": "c",
+    "dni": "e",
+    "distrito": "g",
+    "fecha_nacimiento": "f",
+    "contrasena": "d",
+    "numero_viajes": 0
+  },
+  {
+    "nombres": "1",
+    "apellidos": "2",
+    "telefono": "3",
+    "dni": "5",
+    "distrito": "7",
+    "fecha_nacimiento": "6",
+    "contrasena": "4",
+    "numero_viajes": 0
+  },
+  {
+    "nombres": "Mihael Jhire",
+    "apellidos": "Cristobal Rojas",
+    "telefono": "995505694",
+    "dni": "71632395",
+    "distrito": "Puente Piedra",
+    "fecha_nacimiento": "05/01/2006",
+    "contrasena": "mihaelcr05",
+    "numero_viajes": 0
+  }
+]
