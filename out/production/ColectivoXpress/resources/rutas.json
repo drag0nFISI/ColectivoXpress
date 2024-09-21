@@ -1,0 +1,16 @@
+[
+  {
+    "origen": "Lima",
+    "destino": "Chancay",
+    "tiempo_aproximado": "2 horas",
+    "precio": 50.0,
+    "oferta_descuento": 0.0
+  },
+  {
+    "origen": "Lima",
+    "destino": "Trujillo",
+    "tiempo_aproximado": "5 horas",
+    "precio": 80.0,
+    "oferta_descuento": 0.0
+  }
+]

@@ -15,7 +15,7 @@ public class IngresoPasajero {
         IngresoPasajero mc = new IngresoPasajero();
         int aux=0;
         while(true){
-            System.out.println("\n----------- INGRESO DE PASAJERO ---------");
+            System.out.println("----------- INGRESO DE PASAJERO ---------");
             System.out.println("Seleccione lo que desea hacer: ");
             System.out.println("1. Registrarme");
             System.out.println("2. Login");

@@ -1,6 +1,7 @@
 package Views;
 import Services.PasajeroService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 //pseudo vista de menu principal
@@ -15,7 +16,7 @@ public class MenuPrincipal {
             int aux = 0;
             boolean permitido = false;
 
-            System.out.println("BIENVENIDO AL MENU PRINCIPAL");
+            System.out.println("\n---------- BIENVENIDO AL MENU PRINCIPAL --------");
             System.out.println("1. Soy pasajero");
             System.out.println("2. Soy conductor");
             System.out.println("3. Soy administrador");
