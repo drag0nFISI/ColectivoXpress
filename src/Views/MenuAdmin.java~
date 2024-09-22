@@ -230,11 +230,5 @@ public class MenuAdmin {
         System.out.println("Editar numero de dias de descanso de trabajadores: ");
         System.out.println("Insertar cantidad de dias: ");
         int limite_dias_descanso = sc.nextInt();
-        boolean exito = cs.editar_limite_dias_descanso(limite_dias_descanso);
-        if(exito){
-            System.out.println("Limite de dias de descanso cambiado con exito");
-        } else {
-            System.out.println("NO SE PUDO CAMBIAR EL LIMITE");
-        }
     }
 }

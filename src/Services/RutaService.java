@@ -44,6 +44,7 @@ public class RutaService {
 
         ruta.set_tiempo_aproximado(datos.get("tiempo_aproximado"));
         ruta.set_precio(Float.parseFloat(datos.get("precio")));
+        ruta.set_precio_oferta(Float.parseFloat(datos.get("precio_oferta")));
 
         boolean guardar = rr.guardar_ruta(ruta);
         if(!guardar){
@@ -71,7 +72,7 @@ public class RutaService {
             System.out.println("Destino: "+ruta.destino);
             System.out.println("Tiempo aproximado: "+ruta.tiempo_aproximado);
             System.out.println("Precio: "+ruta.precio);
-            System.out.println("Oferta descuento (%): "+ruta.oferta_descuento*100);
+            System.out.println("Precio Oferta: "+ruta.precio_oferta);
         }
     }
 

@@ -6,7 +6,7 @@ public class Ruta {
     public String destino;
     public String tiempo_aproximado;
     public float precio;
-    public float oferta_descuento;
+    public float precio_oferta;
 
     public Ruta(){
 
@@ -24,8 +24,8 @@ public class Ruta {
     public float get_precio(){
         return this.precio;
     }
-    public float get_oferta_descuento(){
-        return this.oferta_descuento;
+    public float get_precio_oferta(){
+        return this.precio_oferta;
     }
 
     public void set_origen(String origen){
@@ -40,7 +40,7 @@ public class Ruta {
     public void set_precio(float precio){
         this.precio = precio;
     }
-    public void set_oferta_descuento(float oferta_descuento){
-        this.oferta_descuento = oferta_descuento;
+    public void set_precio_oferta(float precio_oferta){
+        this.precio_oferta = precio_oferta;
     }
 }

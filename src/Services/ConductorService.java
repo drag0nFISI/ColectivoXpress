@@ -1,9 +1,11 @@
 package Services;
 
 import Models.Conductor;
+import Repository.AdminRepository;
 import Repository.ConductorRepository;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class ConductorService {
 
@@ -73,5 +75,58 @@ public class ConductorService {
         boolean exito = cr.editar_conductor(conductor);
 
         return exito;
+    }
+
+    public boolean editar_dias_descanso(Conductor conductor, List<String> dias){
+        boolean eliminar = cr.eliminar_conductor(conductor.dni);
+        if(!eliminar){
+            return false;
+        }
+        conductor.set_dias_descanso(dias);
+        boolean guardar = cr.guardar_conductor(conductor);
+        if (!guardar){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean editar_limite_dias_descanso(int nuevo_limite){
+        AdminRepository ar = new AdminRepository();
+        HashMap<String, Object> configuraciones = new HashMap<>();
+        try{
+            configuraciones = ar.obtener_configuraciones();
+        } catch (Exception ex){
+            ar = null;
+            return false;
+        }
+
+        if(configuraciones==null){
+            return false;
+        }
+
+        configuraciones.put("limite_dias_descanso", nuevo_limite);
+
+        boolean exito = ar.guardar_configuraciones(configuraciones);
+
+        ar = null;
+
+        if(exito){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public HashMap<String, Object> obtener_configuraciones(){
+        AdminRepository ar = new AdminRepository();
+        HashMap<String, Object> configuraciones = new HashMap<>();
+        try{
+            configuraciones = ar.obtener_configuraciones();
+        } catch (Exception ex){
+            ar = null;
+            return null;
+        }
+        ar = null;
+        return configuraciones;
     }
 }

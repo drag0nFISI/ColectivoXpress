@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AdminRepository {
@@ -76,6 +77,34 @@ public class AdminRepository {
             }
         }
         return null;
+    }
+
+    public HashMap<String, Object> obtener_configuraciones(){
+        Gson gson = new Gson();
+        Type tipoMapa = new TypeToken<HashMap<String, Object>>(){}.getType();
+        HashMap<String, Object> configuraciones;
+
+        try (FileReader reader = new FileReader("src/resources/configuraciones.json")) {
+            configuraciones = gson.fromJson(reader, tipoMapa);
+
+            return configuraciones;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean guardar_configuraciones(HashMap<String, Object> configuraciones){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String jsonString = gson.toJson(configuraciones);
+
+        try (FileWriter writer = new FileWriter("src/resources/configuraciones.json")) {
+            writer.write(jsonString);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }
