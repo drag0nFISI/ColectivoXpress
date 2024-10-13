@@ -13,6 +13,7 @@ public class Conductor {
     public String fecha_nacimiento;
     public String contrasena;
     public List<String> dias_descanso;
+    public Viaje viaje_actual;
 
     public Conductor(String nombres, String apellidos, String telefono, String dni, String fecha_nacimiento, String distrito, String contrasena){
         this.nombres = nombres;
@@ -23,6 +24,7 @@ public class Conductor {
         this.distrito = distrito;
         this.contrasena = contrasena;
         this.dias_descanso = new ArrayList<>();
+        this.viaje_actual = null;
     }
 
     public static int get_limite_dias_descanso(){
@@ -31,6 +33,13 @@ public class Conductor {
 
     public static void set_limite_dias_descanso(int nuevo_limite){
         limite_dias_descanso = nuevo_limite;
+    }
+
+    public Viaje get_viaje_actual(){
+        return this.viaje_actual;
+    }
+    public void set_viaje_actual(Viaje viaje_actual){
+        this.viaje_actual = viaje_actual;
     }
 
     public String get_nombres(){

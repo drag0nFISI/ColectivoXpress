@@ -1,13 +1,15 @@
 package Views;
 
 import Models.Conductor;
+import Models.Ruta;
+import Models.Viaje;
+import Repository.RutaRepository;
+import Repository.ViajeRepository;
 import Services.ConductorService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import java.util.HashMap;
+import javax.management.relation.RelationNotFoundException;
+import java.time.LocalDate;
+import java.util.*;
 
 public class MenuConductor {
 
@@ -18,6 +20,7 @@ public class MenuConductor {
         MenuConductor mc = new MenuConductor();
 
         mc.comprobaciones_automaticas();
+        mc.comprobar_viaje_actual(conductor);
            
         boolean stay = true;
         while(stay){
@@ -27,7 +30,8 @@ public class MenuConductor {
             System.out.println("1. Ver mi perfil");
             System.out.println("2. Editar mi perfil");
             System.out.println("3. Editar mis dias de descanso");
-            System.out.println("4. Volver");
+            System.out.println("4. Ver viaje asignado");
+            System.out.println("5. Volver");
             int aux = sc.nextInt();
             sc.nextLine();
             switch (aux){
@@ -41,10 +45,81 @@ public class MenuConductor {
                     mc.editar_dias_descanso(conductor);
                     break;
                 case 4:
+                    mc.ver_viaje_asignado(conductor);
+                    break;
+                case 5:
                     stay = false;
                     break;
                 default:
                     System.out.println("Escoja una opcion valida...");
+            }
+        }
+    }
+
+    public void comprobar_viaje_actual(Conductor conductor){
+        if(conductor.get_viaje_actual() == null){
+            RutaRepository rr = new RutaRepository();
+            List<Ruta> rutas = rr.obtener_rutas();
+            if(rutas == null){
+                return;
+            }
+            ViajeRepository vr = new ViajeRepository();
+            List<Viaje> viajes = vr.obtener_viajes();
+
+            Ruta ruta_elegida = null;
+
+            int contador = 0;
+            int aux2 = 0;
+
+            for(Ruta ruta:rutas){
+                int aux = 0;
+                aux2 += 1;
+                if(viajes != null){
+                    for(Viaje viaje:viajes){
+                        if(ruta.get_origen().equals(viaje.get_ruta().get_origen()) && ruta.get_destino().equals(viaje.get_ruta().get_destino())){
+                            aux++;
+                        }
+                    }
+                }
+                if(aux2 == 1){
+                    contador = aux;
+                }
+                if(aux <= contador){
+                    contador = aux;
+                    ruta_elegida = ruta;
+                }
+            }
+
+            if(ruta_elegida != null){
+                Random random = new Random();
+                String id = "";
+                //Genera ID random con 5 digitos para Viaje... realiza comprobacion
+                boolean encontrado = true;
+                while(encontrado){
+                    int id_aux = 10000 + random.nextInt(90000);
+                    id = String.format("%05d", id_aux);
+
+                    if(viajes != null){
+                        for(Viaje viaje:viajes){
+                            if(viaje.get_id().equals(id)){
+                                encontrado = true;
+                                break;
+                            }else{
+                                encontrado = false;
+                            }
+                        }
+                    } else {
+                        encontrado = false;
+                    }
+                }
+
+                LocalDate fecha_actual = LocalDate.now();
+                LocalDate fecha_viaje = fecha_actual.plusDays(1);
+
+                Viaje viaje = new Viaje(id, fecha_viaje.toString(), ruta_elegida, conductor, 0);
+
+                vr.guardar_viaje(viaje);
+                conductor.set_viaje_actual(viaje);
             }
         }
     }
@@ -54,7 +129,7 @@ public class MenuConductor {
         if(configuraciones ==null){
             return;
         }
-        if(configuraciones.get("limite_dias_descanso") != null){
+        if(configuraciones.get("limite_dias_descanso") != null) {
             double limite = Double.parseDouble(configuraciones.get("limite_dias_descanso").toString());
             Conductor.set_limite_dias_descanso((int) limite);
         }
@@ -110,6 +185,20 @@ public class MenuConductor {
             System.out.println("SE EDITO CON EXITO LOS DIAS DE DESCANSO");
         } else {
             System.out.println("NO SE PUDO EDITAR LOS DIAS DE DESCANSO");
+        }
+    }
+
+    public void ver_viaje_asignado(Conductor conductor){
+        System.out.println("\n----------- VER VIAJE ASIGNADO -----------");
+        if(conductor.get_viaje_actual() == null){
+            System.out.println("No hay viaje asignado...");
+        } else {
+            Viaje viaje_actual = conductor.get_viaje_actual();
+            System.out.println("ID: "+viaje_actual.get_id());
+            System.out.println("Origen: "+viaje_actual.get_ruta().get_origen());
+            System.out.println("Destino: "+viaje_actual.get_ruta().get_destino());
+            System.out.println("Fecha de viaje: "+viaje_actual.get_fecha());
+            System.out.println("Pasajeros: "+viaje_actual.get_pasajeros());
         }
     }
 }

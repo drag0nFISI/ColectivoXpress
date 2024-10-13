@@ -1,0 +1,24 @@
+[
+  {
+    "id": "74032",
+    "fecha": "2024-10-14",
+    "ruta": {
+      "origen": "Lima",
+      "destino": "Chancay",
+      "tiempo_aproximado": "1",
+      "precio": 12.0,
+      "precio_oferta": 0.0
+    },
+    "capacidad_pasajeros": 0,
+    "conductor": {
+      "nombres": "Juanito",
+      "apellidos": "Alimaña",
+      "telefono": "984674234",
+      "dni": "00000000",
+      "distrito": "Lima",
+      "fecha_nacimiento": "04/04/2004",
+      "contrasena": "contra",
+      "dias_descanso": []
+    }
+  }
+]

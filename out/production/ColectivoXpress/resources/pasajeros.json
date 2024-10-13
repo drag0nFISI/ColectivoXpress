@@ -22,21 +22,21 @@
   {
     "nombres": "Mihael Jhire",
     "apellidos": "Cristobal Rojas",
-    "telefono": "999999999",
+    "telefono": "111111111",
     "dni": "71632395",
-    "distrito": "Carabyllo",
+    "distrito": "Lima",
     "fecha_nacimiento": "05/01/2006",
-    "contrasena": "mihaelcr05",
+    "contrasena": "contra",
     "numero_viajes": 0
   },
   {
     "nombres": "Miguel",
     "apellidos": "Solis",
     "telefono": "123456789",
-    "dni": "72706520",
+    "dni": "12345678",
     "distrito": "Pro",
     "fecha_nacimiento": "14/01/2006",
-    "contrasena": "miguelalonso",
+    "contrasena": "contra",
     "numero_viajes": 0
   }
 ]
