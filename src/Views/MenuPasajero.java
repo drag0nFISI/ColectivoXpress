@@ -1,6 +1,5 @@
 package Views;
 import Models.Ruta;
-import Repository.RutaRepository;
 import Services.RutaService;
 import Services.PasajeroService;
 import Models.Pasajero;
