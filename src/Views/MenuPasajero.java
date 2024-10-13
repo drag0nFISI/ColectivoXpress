@@ -12,13 +12,15 @@ public class MenuPasajero {
 
     public static void main(Pasajero pasajero) {
         MenuPasajero mp = new MenuPasajero();
-
-        while(true){
+           
+        boolean stay = true;
+        while(stay){
 
             System.out.println("------------ MENU DE PASAJERO ------------");
             System.out.println("Elija la opcion que desea: ");
             System.out.println("1. Ver mi perfil");
             System.out.println("2. Editar mi perfil");
+            System.out.println("3. Volver");
             int aux = sc.nextInt();
             sc.nextLine();
             switch (aux){
@@ -27,6 +29,9 @@ public class MenuPasajero {
                     break;
                 case 2:
                     mp.editar_perfil(pasajero);
+                    break;
+                case 3:
+                    stay = false;
                     break;
                 default:
                     System.out.println("Escoja una opcion valida...");

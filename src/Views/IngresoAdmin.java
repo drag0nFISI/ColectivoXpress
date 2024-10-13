@@ -17,17 +17,28 @@ public class IngresoAdmin {
     }
 
     public void login_admin(){
-        System.out.println("\n----------------LOGIN DE ADMIN-------------");
-        System.out.print("Ingrese su codigo: ");
-        String codigo = sc.nextLine();
-        System.out.print("\nIngrese su contrasena: ");
-        String contrasena = sc.nextLine();
-        Admin admin = as.login_admin(codigo,contrasena);
-        if(admin !=null){
-            System.out.println("\nLogeado Correctamente");
-            MenuAdmin.main(admin);
-        } else {
-            System.out.println("\nError al logearse");
+        boolean stay = true;
+
+        while(stay){
+
+            System.out.println("\n----------------LOGIN DE ADMIN-------------");
+            System.out.println("PARA VOLVER ATRAS DEJE VACIOS LOS CAMPOS DE CODIGO Y CONTRASENA");
+            System.out.print("Ingrese su codigo: ");
+            String codigo = sc.nextLine();
+            System.out.print("\nIngrese su contrasena: ");
+            String contrasena = sc.nextLine();
+
+            if(codigo.equals("") && contrasena.equals("")){
+                stay = false;
+                return;
+            }
+            Admin admin = as.login_admin(codigo,contrasena);
+            if(admin !=null){
+                System.out.println("\nLogeado Correctamente");
+                MenuAdmin.main(admin);
+            } else {
+                System.out.println("\nError al logearse");
+            }
         }
     }
 

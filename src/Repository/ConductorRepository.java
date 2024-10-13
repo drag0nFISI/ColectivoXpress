@@ -33,7 +33,6 @@ public class ConductorRepository {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String clientes_json = gson.toJson(conductores);
-        System.out.println(clientes_json);
 
         try(FileWriter file = new FileWriter("src/resources/conductores.json")) {
             file.write(clientes_json);

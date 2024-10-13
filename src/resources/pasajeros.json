@@ -22,11 +22,21 @@
   {
     "nombres": "Mihael Jhire",
     "apellidos": "Cristobal Rojas",
-    "telefono": "995505694",
+    "telefono": "111111111",
     "dni": "71632395",
-    "distrito": "Puente Piedra",
+    "distrito": "Lima",
     "fecha_nacimiento": "05/01/2006",
-    "contrasena": "mihaelcr05",
+    "contrasena": "contra",
+    "numero_viajes": 0
+  },
+  {
+    "nombres": "Miguel",
+    "apellidos": "Solis",
+    "telefono": "123456789",
+    "dni": "12345678",
+    "distrito": "Pro",
+    "fecha_nacimiento": "14/01/2006",
+    "contrasena": "contra",
     "numero_viajes": 0
   }
 ]

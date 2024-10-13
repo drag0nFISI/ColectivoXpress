@@ -1,7 +1,4 @@
 package Models;
-import Services.ConductorService;
-
-import java.util.HashMap;
 
 public class Admin {
     public String codigo;

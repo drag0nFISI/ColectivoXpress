@@ -1,16 +1,24 @@
 [
   {
+    "nombres": "Juanito",
+    "apellidos": "Alimaña",
+    "telefono": "984674234",
+    "dni": "00000000",
+    "distrito": "Lima",
+    "fecha_nacimiento": "04/04/2004",
+    "contrasena": "contra",
+    "dias_descanso": []
+  },
+  {
     "nombres": "Jose",
     "apellidos": "Martinez",
     "telefono": "945673456",
-    "dni": "712335345",
+    "dni": "12345678",
     "distrito": "Smp",
     "fecha_nacimiento": "07/08/2000",
-    "contrasena": "ostia",
+    "contrasena": "contra",
     "dias_descanso": [
-      "lunes",
-      "miercoles",
-      "viernes"
+      "martes"
     ]
   }
 ]

@@ -1,17 +1,14 @@
 package Views;
-import Services.PasajeroService;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 //pseudo vista de menu principal
 public class MenuPrincipal {
 
     static Scanner sc = new Scanner(System.in);
-    static PasajeroService cs = new PasajeroService();
 
     public static void main(String[] args) {
-        while(true){
+        while (true) {
 
             int aux = 0;
             boolean permitido = false;
@@ -21,17 +18,17 @@ public class MenuPrincipal {
             System.out.println("2. Soy conductor");
             System.out.println("3. Soy administrador");
 
-            while(!permitido){
-                try{
+            while (!permitido) {
+                try {
                     System.out.print("Ingrese su opcion: ");
                     aux = sc.nextInt();
                     permitido = true;
-                } catch(Exception e){
+                } catch (Exception e) {
                     System.out.println("Opcion no valida");
                 }
             }
 
-            switch (aux){
+            switch (aux) {
                 case 1:
                     IngresoPasajero.inicio();
                     break;

@@ -40,7 +40,6 @@ public class RutaRepository {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String clientes_json = gson.toJson(rutas);
-        System.out.println(clientes_json);
 
         try(FileWriter file = new FileWriter("src/resources/rutas.json")) {
             file.write(clientes_json);
@@ -81,7 +80,6 @@ public class RutaRepository {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String clientes_json = gson.toJson(rutas);
-        System.out.println(clientes_json);
 
         try(FileWriter file = new FileWriter("src/resources/rutas.json")) {
             file.write(clientes_json);

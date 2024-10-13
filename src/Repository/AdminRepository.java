@@ -36,7 +36,6 @@ public class AdminRepository {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String clientes_json = gson.toJson(admins);
-        System.out.println(clientes_json);
 
         try(FileWriter file = new FileWriter("src/resources/admins.json")) {
             file.write(clientes_json);

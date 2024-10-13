@@ -14,11 +14,15 @@ public class IngresoPasajero {
     public static void inicio() {
         IngresoPasajero mc = new IngresoPasajero();
         int aux=0;
-        while(true){
+
+        boolean stay = true;
+
+        while(stay){
             System.out.println("\n----------- INGRESO DE PASAJERO ---------");
             System.out.println("Seleccione lo que desea hacer: ");
             System.out.println("1. Registrarme");
             System.out.println("2. Login");
+            System.out.println("3. Salir");
             System.out.print("Ingrese su opcion: ");
             aux = sc.nextInt();
             sc.nextLine();
@@ -28,6 +32,9 @@ public class IngresoPasajero {
                     break;
                 case 2:
                     mc.login_cliente();
+                    break;
+                case 3:
+                    stay = false;
                     break;
                 default:
                     System.out.println("VALOR NO VALIDO");

@@ -7,6 +7,8 @@
     "distrito": "Smp",
     "fecha_nacimiento": "07/08/2000",
     "contrasena": "ostia",
-    "dias_descanso": []
+    "dias_descanso": [
+      "Jueves"
+    ]
   }
 ]

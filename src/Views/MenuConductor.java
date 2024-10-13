@@ -18,14 +18,16 @@ public class MenuConductor {
         MenuConductor mc = new MenuConductor();
 
         mc.comprobaciones_automaticas();
-
-        while(true){
+           
+        boolean stay = true;
+        while(stay){
 
             System.out.println("------------ MENU DE CONDUCTOR ------------");
             System.out.println("Elija la opcion que desea: ");
             System.out.println("1. Ver mi perfil");
             System.out.println("2. Editar mi perfil");
             System.out.println("3. Editar mis dias de descanso");
+            System.out.println("4. Volver");
             int aux = sc.nextInt();
             sc.nextLine();
             switch (aux){
@@ -37,6 +39,9 @@ public class MenuConductor {
                     break;
                 case 3:
                     mc.editar_dias_descanso(conductor);
+                    break;
+                case 4:
+                    stay = false;
                     break;
                 default:
                     System.out.println("Escoja una opcion valida...");
