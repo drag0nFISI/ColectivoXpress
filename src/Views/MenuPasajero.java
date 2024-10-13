@@ -1,67 +1,83 @@
 package Views;
+import Models.Ruta;
+import Repository.RutaRepository;
+import Services.RutaService;
+import Services.PasajeroService;
+import Models.Pasajero;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import Services.PasajeroService;
-import Models.Pasajero;
-
+// Vista para interactuar con el usuario
 public class MenuPasajero {
-
-    static Scanner sc = new Scanner(System.in);
-    static PasajeroService cs = new PasajeroService();
+    static Scanner scanner = new Scanner(System.in);
+    static RutaService rutaService = new RutaService();
+    static PasajeroService pasajeroService = new PasajeroService();
 
     public static void main(Pasajero pasajero) {
-        MenuPasajero mp = new MenuPasajero();
-           
-        boolean stay = true;
-        while(stay){
+        MenuPasajero menuPasajero = new MenuPasajero();
 
+        while (true) {
             System.out.println("------------ MENU DE PASAJERO ------------");
             System.out.println("Elija la opcion que desea: ");
             System.out.println("1. Ver mi perfil");
             System.out.println("2. Editar mi perfil");
-            System.out.println("3. Volver");
-            int aux = sc.nextInt();
-            sc.nextLine();
-            switch (aux){
+            System.out.println("3. Buscar rutas");
+            System.out.println("4. Ver todas las rutas disponibles");
+            System.out.println("5. Salir");
+            int aux = scanner.nextInt();
+            scanner.nextLine();
+            switch (aux) {
                 case 1:
-                    mp.ver_perfil(pasajero);
+                    menuPasajero.ver_perfil(pasajero);
                     break;
                 case 2:
-                    mp.editar_perfil(pasajero);
+                    menuPasajero.editar_perfil(pasajero);
                     break;
                 case 3:
-                    stay = false;
+                    buscarRutas();
                     break;
+                case 4:
+                    rutaService.mostrar_rutas();
+                    break;
+                case 5:
+                    System.out.println("Saliendo del menú de pasajero...");
+                    return;
                 default:
                     System.out.println("Escoja una opcion valida...");
             }
         }
     }
 
-    public void ver_perfil(Pasajero pasajero){
-        cs.mostrar_perfil(pasajero);
+    public void ver_perfil(Pasajero pasajero) {
+        pasajeroService.mostrar_perfil(pasajero);
     }
 
-    public void editar_perfil(Pasajero pasajero){
+    public void editar_perfil(Pasajero pasajero) {
         HashMap<String, String> datos = new HashMap<>();
         System.out.println("\n----------- MODIFICAR PERFIL -----------");
-        System.out.println("Si no quiere modificar algun apartado solo dejelo en blando y de ENTER");
+        System.out.println("Si no quiere modificar algun apartado solo dejelo en blanco y de ENTER");
         System.out.println("Nuevos Nombres: ");
-        datos.put("nombres", sc.nextLine());
+        datos.put("nombres", scanner.nextLine());
         System.out.println("Nuevos Apellidos: ");
-        datos.put("apellidos", sc.nextLine());
+        datos.put("apellidos", scanner.nextLine());
         System.out.println("Nuevo telefono: ");
-        datos.put("telefono", sc.nextLine());
+        datos.put("telefono", scanner.nextLine());
         System.out.println("Nuevo distrito: ");
-        datos.put("distrito", sc.nextLine());
+        datos.put("distrito", scanner.nextLine());
 
-        boolean exito = cs.editar_perfil(pasajero, datos);
-        if(exito){
+        boolean exito = pasajeroService.editar_perfil(pasajero, datos);
+        if (exito) {
             System.out.println("Cambios hechos satisfactoriamente...");
         } else {
             System.out.println("OCURRIO UN ERROR");
         }
     }
 
+    private static void buscarRutas() {
+        System.out.print("Ingrese el origen: ");
+        String origin = scanner.nextLine();
+        System.out.print("Ingrese el destino: ");
+        String destination = scanner.nextLine();
+        Ruta ruta = rutaService.buscar_ruta(origin, destination);
+    }
 }
