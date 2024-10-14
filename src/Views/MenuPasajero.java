@@ -27,7 +27,8 @@ public class MenuPasajero {
             System.out.println("4. Ver todas las rutas disponibles");
             System.out.println("5. Ver viajes disponibles");
             System.out.println("6. Comprar boleto");
-            System.out.println("7. Salir");
+            System.out.println("7. Ver detalles de mi viaje actual");
+            System.out.println("8. Salir");
             int aux = scanner.nextInt();
             scanner.nextLine();
             switch (aux) {
@@ -50,6 +51,9 @@ public class MenuPasajero {
                     menuPasajero.comprar_boleto(pasajero);
                     break;
                 case 7:
+                    menuPasajero.ver_viaje_actual(pasajero);
+                    break;
+                case 8:
                     System.out.println("Saliendo del menú de pasajero...");
                     return;
                 default:
@@ -86,6 +90,22 @@ public class MenuPasajero {
         System.out.println("Ingrese ID del viaje: ");
         String id_viaje = scanner.nextLine();
 
+    }
+
+    public void ver_viaje_actual(Pasajero pasajero){
+        System.out.println("\n----------- VIAJE ACTUAL -----------");
+        Viaje viaje = pasajero.viaje_actual;
+        if(viaje== null){
+            System.out.println("No ha comprado boleto para ningun viaje...");
+            return;
+        }
+        System.out.print("\n------------ Viaje "+viaje.get_ruta().get_origen());
+        System.out.println("-> "+viaje.get_ruta().get_destino()+" -------------");
+        System.out.println("ID del viaje: "+viaje.get_id());
+        System.out.println("Nombre del Conductor: "+viaje.get_conductor().get_nombres());
+        System.out.println("Fecha del viaje: "+viaje.get_fecha());
+        System.out.println("Precio: "+viaje.get_ruta().get_precio());
+        System.out.println("Precio oferta: "+viaje.get_ruta().get_precio_oferta());
     }
 
     public void editar_perfil(Pasajero pasajero) {

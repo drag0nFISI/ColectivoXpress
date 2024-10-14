@@ -1,6 +1,8 @@
 package Models;
 
 import Repository.BoletoRepository;
+import Repository.PasajeroRepository;
+import Repository.ViajeRepository;
 
 import java.util.List;
 import java.util.Objects;
@@ -72,6 +74,11 @@ public class Pasajero {
         boolean exito = br.guardar_boleto(boleto);
         if(exito){
             this.viaje_actual = viaje;
+            PasajeroRepository pr = new PasajeroRepository();
+            pr.editar_cliente(this);
+            viaje.add_pasajero(this);
+            ViajeRepository vr = new ViajeRepository();
+            vr.editar_viaje(viaje);
             return true;
         }
         return false;
