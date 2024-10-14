@@ -2,12 +2,14 @@ package Views;
 import Models.Ruta;
 import Models.Viaje;
 import Repository.ViajeRepository;
+import Repository.BoletoRepository;
 import Services.RutaService;
 import Services.PasajeroService;
 import Models.Pasajero;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import Models.Boleto;
 
 // Vista para interactuar con el usuario
 public class MenuPasajero {
@@ -21,14 +23,14 @@ public class MenuPasajero {
         while (true) {
             System.out.println("------------ MENU DE PASAJERO ------------");
             System.out.println("Elija la opcion que desea: ");
-            System.out.println("1. Ver mi perfil");
-            System.out.println("2. Editar mi perfil");
-            System.out.println("3. Buscar rutas");
-            System.out.println("4. Ver todas las rutas disponibles");
-            System.out.println("5. Ver viajes disponibles");
-            System.out.println("6. Comprar boleto");
-            System.out.println("7. Ver detalles de mi viaje actual");
-            System.out.println("8. Salir");
+            System.out.println("\t1. Ver mi perfil");
+            System.out.println("\t2. Editar mi perfil");
+            System.out.println("\t3. Buscar rutas");
+            System.out.println("\t4. Ver todas las rutas disponibles");
+            System.out.println("\t5. Ver viajes disponibles");
+            System.out.println("\t6. Comprar boleto");
+            System.out.println("\t7. Ver detalles de mi viaje actual");
+            System.out.println("\t8. Salir");
             int aux = scanner.nextInt();
             scanner.nextLine();
             switch (aux) {
@@ -89,7 +91,48 @@ public class MenuPasajero {
         System.out.println("\n----------- COMPRAR BOLETO -----------");
         System.out.println("Ingrese ID del viaje: ");
         String id_viaje = scanner.nextLine();
+        
+        ViajeRepository vr = new ViajeRepository();
+        Viaje viaje = vr.obtener_viaje(id_viaje);
 
+        
+        if (viaje == null) {
+        System.out.println("Viaje no encontrado. Intente nuevamente.");
+        return;
+        }
+        
+        
+        System.out.println("La ruta elegida es: " + viaje.get_ruta().get_origen() + " -> " + viaje.get_ruta().get_destino());
+        System.out.println("Elija un metodo de pago:"+ "\n\t1. Pago con Tarjeta "+"\n\t2. Pago en efectivo");
+        int metodoPago = scanner.nextInt();
+        scanner.nextLine();
+        
+        String metodoPagoStr = "";
+        if (metodoPago == 1) {
+            metodoPagoStr = "Tarjeta";
+        } else if (metodoPago == 2) {
+            metodoPagoStr = "Efectivo";
+        } else {
+            System.out.println("Opción inválida.");
+            return;
+        }
+        if (pasajero == null) {
+            System.out.println("Error: Pasajero nulo.");
+            return;
+        }
+        if (viaje.get_ruta() == null) {
+            System.out.println("Error: La ruta del viaje es nula.");
+            return;
+        }
+
+        float precio = viaje.get_ruta().get_precio(); // Asegúrate de que esto no falle
+        Boleto boleto = new Boleto(pasajero, viaje, metodoPagoStr, precio);
+        BoletoRepository br = new BoletoRepository();
+        if (br.guardar_boleto(boleto)) {
+            System.out.println("Boleto comprado exitosamente.");
+        } else {
+        System.out.println("Error al comprar el boleto.");
+    }
     }
 
     public void ver_viaje_actual(Pasajero pasajero){

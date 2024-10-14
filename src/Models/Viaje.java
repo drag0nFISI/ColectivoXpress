@@ -1,7 +1,7 @@
 package Models;
 
 import Repository.ViajeRepository;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Viaje {
@@ -12,17 +12,22 @@ public class Viaje {
     public int capacidad_pasajeros;
     public List<Pasajero> pasajeros;
     public Conductor conductor;
+    public float precio;
 
-    public Viaje(String id, String fecha, Ruta ruta, Conductor conductor, int capacidad_pasajeros) {
+    public Viaje(String id, String fecha, Ruta ruta, Conductor conductor,  float precio) {
         this.id = id;
         this.fecha = fecha;
         this.ruta = ruta;
-        this.capacidad_pasajeros = capacidad_pasajeros;
+        
         this.conductor = conductor;
+        this.precio = precio;
+        this.pasajeros = new ArrayList<>();
     }
 
-
-
+    
+    public float get_precio() {
+        return this.precio;
+    }
     public String get_id(){
         return this.id;
     }
