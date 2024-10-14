@@ -1,6 +1,11 @@
 package Models;
 
+import Repository.BoletoRepository;
+
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
+
 //EL OBJETO CLIENTE COMO TAL
 public class Pasajero {
     public String nombres;
@@ -10,6 +15,7 @@ public class Pasajero {
     public String distrito;
     public String fecha_nacimiento;
     public String contrasena;
+    public Viaje viaje_actual;
     public int numero_viajes;
     
     public Pasajero(String nombres, String apellidos, String telefono, String dni, String fecha_nacimiento, String distrito, String contrasena){
@@ -36,6 +42,39 @@ public class Pasajero {
         if(!Objects.equals(distrito, "")){
             this.distrito = distrito;
         }
+    }
+
+
+    public boolean generar_boleto(Viaje viaje){
+
+        if(viaje==null){
+            return false;
+        }
+
+        Random random = new Random();
+        String id = "";
+
+        BoletoRepository br = new BoletoRepository();
+
+        //Genera ID random con 5 digitos para boleto... realiza comprobacion
+        boolean encontrado = true;
+        while(encontrado){
+            int id_aux = 10000 + random.nextInt(90000);
+            id = String.format("%05d", id_aux);
+
+            Boleto boleto_encontrado = br.buscar_boleto(id);
+
+            if(boleto_encontrado == null){
+                encontrado = false;
+            }
+        }
+        Boleto boleto = new Boleto(id, viaje, this.get_dni());
+        boolean exito = br.guardar_boleto(boleto);
+        if(exito){
+            this.viaje_actual = viaje;
+            return true;
+        }
+        return false;
     }
 
     public String get_nombres() {

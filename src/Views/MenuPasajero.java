@@ -1,9 +1,12 @@
 package Views;
 import Models.Ruta;
+import Models.Viaje;
+import Repository.ViajeRepository;
 import Services.RutaService;
 import Services.PasajeroService;
 import Models.Pasajero;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 // Vista para interactuar con el usuario
@@ -22,7 +25,9 @@ public class MenuPasajero {
             System.out.println("2. Editar mi perfil");
             System.out.println("3. Buscar rutas");
             System.out.println("4. Ver todas las rutas disponibles");
-            System.out.println("5. Salir");
+            System.out.println("5. Ver viajes disponibles");
+            System.out.println("6. Comprar boleto");
+            System.out.println("7. Salir");
             int aux = scanner.nextInt();
             scanner.nextLine();
             switch (aux) {
@@ -39,6 +44,12 @@ public class MenuPasajero {
                     rutaService.mostrar_rutas();
                     break;
                 case 5:
+                    menuPasajero.ver_viajes_disponibles();
+                    break;
+                case 6:
+                    menuPasajero.comprar_boleto(pasajero);
+                    break;
+                case 7:
                     System.out.println("Saliendo del menú de pasajero...");
                     return;
                 default:
@@ -49,6 +60,32 @@ public class MenuPasajero {
 
     public void ver_perfil(Pasajero pasajero) {
         pasajeroService.mostrar_perfil(pasajero);
+    }
+
+    public void ver_viajes_disponibles(){
+        System.out.println("------------ VIAJES DISPONIBLES ------------");
+        ViajeRepository vr = new ViajeRepository();
+        List<Viaje> viajes = vr.obtener_viajes();
+        if(viajes == null){
+            System.out.println("No hay viajes disponibles...");
+            return;
+        }
+        for (Viaje viaje : viajes) {
+            System.out.print("\n------------ Viaje "+viaje.get_ruta().get_origen());
+            System.out.println("-> "+viaje.get_ruta().get_destino()+" -------------");
+            System.out.println("ID del viaje: "+viaje.get_id());
+            System.out.println("Nombre del Conductor: "+viaje.get_conductor().get_nombres());
+            System.out.println("Fecha del viaje: "+viaje.get_fecha());
+            System.out.println("Precio: "+viaje.get_ruta().get_precio());
+            System.out.println("Precio oferta: "+viaje.get_ruta().get_precio_oferta());
+        }
+    }
+
+    public void comprar_boleto(Pasajero pasajero){
+        System.out.println("\n----------- COMPRAR BOLETO -----------");
+        System.out.println("Ingrese ID del viaje: ");
+        String id_viaje = scanner.nextLine();
+
     }
 
     public void editar_perfil(Pasajero pasajero) {
