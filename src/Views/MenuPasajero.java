@@ -23,14 +23,14 @@ public class MenuPasajero {
         while (true) {
             System.out.println("------------ MENU DE PASAJERO ------------");
             System.out.println("Elija la opcion que desea: ");
-            System.out.println("1. Ver mi perfil");
-            System.out.println("2. Editar mi perfil");
-            System.out.println("3. Buscar rutas");
-            System.out.println("4. Ver todas las rutas disponibles");
-            System.out.println("5. Ver viajes disponibles");
-            System.out.println("6. Comprar boleto");
-            System.out.println("7. Ver detalles de mi viaje actual");
-            System.out.println("8. Salir");
+            System.out.println("\t1. Ver mi perfil");
+            System.out.println("\t2. Editar mi perfil");
+            System.out.println("\t3. Buscar rutas");
+            System.out.println("\t4. Ver todas las rutas disponibles");
+            System.out.println("\t5. Ver viajes disponibles");
+            System.out.println("\t6. Comprar boleto");
+            System.out.println("\t7. Ver detalles de mi viaje actual");
+            System.out.println("\t8. Salir");
             int aux = scanner.nextInt();
             scanner.nextLine();
             switch (aux) {

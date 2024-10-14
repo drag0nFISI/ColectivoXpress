@@ -14,9 +14,9 @@ public class MenuPrincipal {
             boolean permitido = false;
 
             System.out.println("\n---------- BIENVENIDO AL MENU PRINCIPAL --------");
-            System.out.println("1. Soy pasajero");
-            System.out.println("2. Soy conductor");
-            System.out.println("3. Soy administrador");
+            System.out.println("\t1. Soy pasajero");
+            System.out.println("\t2. Soy conductor");
+            System.out.println("\t3. Soy administrador");
 
             while (!permitido) {
                 try {
