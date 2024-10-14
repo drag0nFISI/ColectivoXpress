@@ -19,7 +19,8 @@
       "fecha_nacimiento": "04/04/2004",
       "contrasena": "contra",
       "dias_descanso": []
-    }
+    },
+    "precio": 0.0
   },
   {
     "id": "74136",
@@ -32,6 +33,7 @@
       "precio_oferta": 0.0
     },
     "capacidad_pasajeros": 0,
+    "pasajeros": [],
     "conductor": {
       "nombres": "Jose",
       "apellidos": "Martinez",
@@ -43,6 +45,7 @@
       "dias_descanso": [
         "martes"
       ]
-    }
+    },
+    "precio": 0.0
   }
 ]

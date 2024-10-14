@@ -50,7 +50,7 @@ public class IngresoPasajero {
         datos.put("nombres", sc.nextLine());
         System.out.println("Ingrese su apellido: ");
         datos.put("apellidos", sc.nextLine());
-        System.out.println("Ingrese su telefono: ");
+        System.out.println("Ingrese su gmail: ");
         datos.put("telefono", sc.nextLine());
         System.out.println("Ingrese su contrasena: ");
         datos.put("contrasena", sc.nextLine());

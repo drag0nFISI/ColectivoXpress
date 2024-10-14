@@ -128,7 +128,8 @@ public class MenuPasajero {
         float precio = viaje.get_ruta().get_precio(); // Asegúrate de que esto no falle
         Boleto boleto = new Boleto(pasajero, viaje, metodoPagoStr, precio);
         BoletoRepository br = new BoletoRepository();
-        if (br.guardar_boleto(boleto)) {
+        if (pasajero.generar_boleto(viaje)) {
+
             System.out.println("Boleto comprado exitosamente.");
         } else {
         System.out.println("Error al comprar el boleto.");

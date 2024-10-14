@@ -27,6 +27,7 @@ public class Pasajero {
         this.fecha_nacimiento = fecha_nacimiento;
         this.distrito = distrito;
         this.contrasena = contrasena;
+        this.viaje_actual = null;
         this.numero_viajes = 0;
     }
 

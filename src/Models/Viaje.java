@@ -64,6 +64,9 @@ public class Viaje {
     }
 
     public boolean add_pasajero(Pasajero pasajero){
+        if(this.pasajeros == null){
+            this.pasajeros = new ArrayList<>();
+        }
         if(this.pasajeros.size() >= this.capacidad_pasajeros){
             return false;
         }
