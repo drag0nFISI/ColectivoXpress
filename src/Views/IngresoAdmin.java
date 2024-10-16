@@ -1,15 +1,12 @@
 package Views;
 
 import Models.Admin;
-import Models.Conductor;
-import Services.AdminService;
 
 import java.util.Scanner;
 
 public class IngresoAdmin {
 
     Scanner sc = new Scanner(System.in);
-    AdminService as = new AdminService();
 
     public static void inicio(){
         IngresoAdmin ia = new IngresoAdmin();
@@ -29,12 +26,12 @@ public class IngresoAdmin {
             String contrasena = sc.nextLine();
 
             if(codigo.equals("") && contrasena.equals("")){
-                stay = false;
                 return;
             }
-            Admin admin = as.login_admin(codigo,contrasena);
-            if(admin !=null){
+            Admin admin = Admin.login_admin(codigo,contrasena);
+            if(admin != null){
                 System.out.println("\nLogeado Correctamente");
+                stay = false;
                 MenuAdmin.main(admin);
             } else {
                 System.out.println("\nError al logearse");

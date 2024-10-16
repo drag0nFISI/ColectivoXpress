@@ -5,12 +5,15 @@ import Models.Ruta;
 import Models.Viaje;
 import Repository.RutaRepository;
 import Repository.ViajeRepository;
+import Services.ConductorService;
 
+import javax.management.relation.RelationNotFoundException;
 import java.time.LocalDate;
 import java.util.*;
 
 public class MenuConductor {
 
+    static ConductorService cs = new ConductorService();
     static Scanner sc = new Scanner(System.in);
 
     public static void main(Conductor conductor) {
@@ -122,7 +125,7 @@ public class MenuConductor {
     }
 
     public void comprobaciones_automaticas(){
-        HashMap<String, Object> configuraciones = Conductor.obtener_configuraciones();
+        HashMap<String, Object> configuraciones = cs.obtener_configuraciones();
         if(configuraciones ==null){
             return;
         }
@@ -133,7 +136,7 @@ public class MenuConductor {
     }
 
     public void ver_perfil(Conductor conductor){
-        conductor.mostrar_perfil();
+        cs.mostrar_perfil(conductor);
     }
 
     public void editar_perfil(Conductor conductor){
@@ -149,7 +152,7 @@ public class MenuConductor {
         System.out.println("Nuevo distrito: ");
         datos.put("distrito", sc.nextLine());
 
-        boolean exito = conductor.editar_perfil(datos);
+        boolean exito = cs.editar_perfil(conductor, datos);
         if(exito){
             System.out.println("Cambios hechos correctamente...");
         } else{
@@ -177,7 +180,7 @@ public class MenuConductor {
             dias.add(sc.nextLine());
         }
 
-        boolean exito = conductor.editar_dias_descanso(dias);
+        boolean exito = cs.editar_dias_descanso(conductor, dias);
         if(exito){
             System.out.println("SE EDITO CON EXITO LOS DIAS DE DESCANSO");
         } else {

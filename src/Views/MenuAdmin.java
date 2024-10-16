@@ -3,8 +3,6 @@ package Views;
 import Models.Admin;
 import Models.Conductor;
 import Models.Ruta;
-import Services.ConductorService;
-import Services.RutaService;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -13,8 +11,6 @@ import java.util.Scanner;
 public class MenuAdmin {
 
     static Scanner sc = new Scanner(System.in);
-    ConductorService cs = new ConductorService();
-    RutaService rs = new RutaService();
 
     public static void main(Admin admin) {
         MenuAdmin ma = new MenuAdmin();
@@ -81,7 +77,7 @@ public class MenuAdmin {
         System.out.println("Ingrese el dni: ");
         datos.put("dni", sc.nextLine());
 
-        Conductor conductor = cs.conductor_por_dni(datos.get("dni"));
+        Conductor conductor = Conductor.conductor_por_dni(datos.get("dni"));
         if(conductor!=null){
             System.out.println("Este dni ya esta registrado");
             return;
@@ -94,7 +90,7 @@ public class MenuAdmin {
         System.out.println("Ingrese la contrasena");
         datos.put("contrasena", sc.nextLine());
 
-        boolean exito = cs.registrar_conductor(datos);
+        boolean exito = Conductor.registrar_conductor(datos);
         if(exito){
             System.out.println("SE REGISTRO CORRECTAMENTE AL CONDUCTOR");
         } else {
@@ -107,7 +103,7 @@ public class MenuAdmin {
         System.out.println("Ingrese el dni del conductor: ");
         String dni = sc.nextLine();
 
-        Conductor conductor_existente = cs.conductor_por_dni(dni);
+        Conductor conductor_existente = Conductor.conductor_por_dni(dni);
 
         if(conductor_existente == null){
             System.out.println("No hay conductor con este DNI");
@@ -117,7 +113,7 @@ public class MenuAdmin {
         HashMap<String, String> datos = new HashMap<>();
 
         System.out.println("\n------ Informacion actual ------");
-        cs.mostrar_perfil(conductor_existente);
+        conductor_existente.mostrar_perfil();
         System.out.println("\n------ Modificaciones --------");
         System.out.println("Si no desea modificar algun campo solo presione ENTER");
         System.out.print("Nuevos nombres: ");
@@ -129,7 +125,7 @@ public class MenuAdmin {
         System.out.print("Nuevo distrito: ");
         datos.put("distrito", sc.nextLine());
 
-        boolean exito = cs.editar_perfil(conductor_existente, datos);
+        boolean exito = conductor_existente.editar_perfil(datos);
     }
 
     public void eliminar_conductor(){
@@ -137,7 +133,7 @@ public class MenuAdmin {
         System.out.println("Ingrese el dni del conductor: ");
         String dni = sc.nextLine();
 
-        boolean exito = cs.eliminar_conductor(dni);
+        boolean exito = Conductor.eliminar_conductor(dni);
         if(exito){
             System.out.println("CONDUCTOR ELIMINADO");
         } else {
@@ -153,7 +149,7 @@ public class MenuAdmin {
         System.out.print("Destino: ");
         datos.put("destino", sc.nextLine());
 
-        Ruta ruta_existente = rs.buscar_ruta(datos.get("origen"), datos.get("destino"));
+        Ruta ruta_existente = Ruta.buscar_ruta(datos.get("origen"), datos.get("destino"));
         if(ruta_existente!= null){
             System.out.println("Ya existe esta ruta...");
             return;
@@ -163,11 +159,11 @@ public class MenuAdmin {
         datos.put("precio", sc.nextLine());
         System.out.print("Tiempo aproximado de viaje: ");
         datos.put("tiempo_aproximado", sc.nextLine());
-        boolean exito = rs.agregar_ruta(datos);
+        boolean exito = Ruta.agregar_ruta(datos);
         if(exito){
-            System.out.println("SE AÑADIO LA RUTA CON EXITO");
+            System.out.println("SE AÑADIO LA RUTA CON EXITO\n");
         } else {
-            System.out.println("OCURRIO UN ERROR, NO SE PUDO ANADIR LA RUTA");
+            System.out.println("OCURRIO UN ERROR, NO SE PUDO ANADIR LA RUTA\n");
         }
     }
 
@@ -178,7 +174,7 @@ public class MenuAdmin {
         String origen = sc.nextLine();
         System.out.print("Destino: ");
         String destino = sc.nextLine();
-        Ruta ruta = rs.buscar_ruta(origen, destino);
+        Ruta ruta = Ruta.buscar_ruta(origen, destino);
         if(ruta==null){
             System.out.println("ESTA RUTA NO EXISTE...");
             return;
@@ -194,7 +190,7 @@ public class MenuAdmin {
         System.out.print("Tiempo aproximado de viaje: ");
         datos.put("tiempo_aproximado", sc.nextLine());
 
-        boolean exito = rs.editar_ruta(ruta, datos);
+        boolean exito = ruta.editar_ruta(datos);
         if(exito){
             System.out.println("CAMBIADO EXITOSAMENTE");
         } else {
@@ -213,7 +209,7 @@ public class MenuAdmin {
         System.out.print("Destino: ");
         destino = sc.nextLine();
 
-        boolean exito = rs.eliminar_ruta(origen, destino);
+        boolean exito = Ruta.eliminar_ruta(origen, destino);
         if(exito){
             System.out.println("RUTA ELIMINADA CON EXITO");
         } else {
@@ -222,7 +218,7 @@ public class MenuAdmin {
     }
 
     public void mostrar_rutas(){
-        rs.mostrar_rutas();
+        Ruta.mostrar_rutas();
     }
 
     public void editar_configuraciones(){
@@ -230,7 +226,7 @@ public class MenuAdmin {
         System.out.println("Editar numero de dias de descanso de trabajadores: ");
         System.out.println("Insertar cantidad de dias: ");
         int limite_dias_descanso = sc.nextInt();
-        boolean exito = cs.editar_limite_dias_descanso(limite_dias_descanso);
+        boolean exito = Conductor.editar_limite_dias_descanso(limite_dias_descanso);
         if(exito){
             System.out.println("Limite de dias de descanso cambiado con exito");
         } else {

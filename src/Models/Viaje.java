@@ -18,13 +18,13 @@ public class Viaje {
         this.id = id;
         this.fecha = fecha;
         this.ruta = ruta;
-        
+
         this.conductor = conductor;
         this.precio = precio;
         this.pasajeros = new ArrayList<>();
     }
 
-    
+
     public float get_precio() {
         return this.precio;
     }

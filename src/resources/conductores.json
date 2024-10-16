@@ -1,24 +1,40 @@
 [
   {
-    "nombres": "Juanito",
-    "apellidos": "Alimaña",
-    "telefono": "984674234",
-    "dni": "00000000",
-    "distrito": "Lima",
-    "fecha_nacimiento": "04/04/2004",
-    "contrasena": "contra",
-    "dias_descanso": []
-  },
-  {
-    "nombres": "Jose",
-    "apellidos": "Martinez",
-    "telefono": "945673456",
-    "dni": "12345678",
-    "distrito": "Smp",
-    "fecha_nacimiento": "07/08/2000",
-    "contrasena": "contra",
-    "dias_descanso": [
-      "martes"
-    ]
+    "pasajero": {
+      "nombres": "Mihael",
+      "apellidos": "Cristobal",
+      "telefono": "mcrlightblue@gmail.com",
+      "dni": "7088679",
+      "distrito": "Pt. Piedra",
+      "fecha_nacimiento": "05/01/2006",
+      "contrasena": "1234",
+      "numero_viajes": 0
+    },
+    "viaje": {
+      "id": "75129",
+      "fecha": "2024-10-15",
+      "ruta": {
+        "origen": "Lima",
+        "destino": "Arequipa",
+        "tiempo_aproximado": "12h",
+        "precio": 120.0,
+        "precio_oferta": 0.0
+      },
+      "capacidad_pasajeros": 0,
+      "pasajeros": [],
+      "conductor": {
+        "nombres": "Kevin",
+        "apellidos": "Chamorro",
+        "telefono": "72790234",
+        "dni": "8282890",
+        "distrito": "Olivos",
+        "fecha_nacimiento": "83dw",
+        "contrasena": "1234",
+        "dias_descanso": []
+      },
+      "precio": 0.0
+    },
+    "metodoPago": "Tarjeta",
+    "precio": 0.0
   }
 ]

@@ -3,8 +3,6 @@ import Models.Ruta;
 import Models.Viaje;
 import Repository.ViajeRepository;
 import Repository.BoletoRepository;
-import Services.RutaService;
-import Services.PasajeroService;
 import Models.Pasajero;
 import java.util.HashMap;
 import java.util.List;
@@ -14,8 +12,6 @@ import Models.Boleto;
 // Vista para interactuar con el usuario
 public class MenuPasajero {
     static Scanner scanner = new Scanner(System.in);
-    static RutaService rutaService = new RutaService();
-    static PasajeroService pasajeroService = new PasajeroService();
 
     public static void main(Pasajero pasajero) {
         MenuPasajero menuPasajero = new MenuPasajero();
@@ -44,7 +40,7 @@ public class MenuPasajero {
                     buscarRutas();
                     break;
                 case 4:
-                    rutaService.mostrar_rutas();
+                    Ruta.mostrar_rutas();
                     break;
                 case 5:
                     menuPasajero.ver_viajes_disponibles();
@@ -65,7 +61,7 @@ public class MenuPasajero {
     }
 
     public void ver_perfil(Pasajero pasajero) {
-        pasajeroService.mostrar_perfil(pasajero);
+        pasajero.mostrar_perfil();
     }
 
     public void ver_viajes_disponibles(){
@@ -91,22 +87,22 @@ public class MenuPasajero {
         System.out.println("\n----------- COMPRAR BOLETO -----------");
         System.out.println("Ingrese ID del viaje: ");
         String id_viaje = scanner.nextLine();
-        
+
         ViajeRepository vr = new ViajeRepository();
         Viaje viaje = vr.obtener_viaje(id_viaje);
 
-        
+
         if (viaje == null) {
-        System.out.println("Viaje no encontrado. Intente nuevamente.");
-        return;
+            System.out.println("Viaje no encontrado. Intente nuevamente.");
+            return;
         }
-        
-        
+
+
         System.out.println("La ruta elegida es: " + viaje.get_ruta().get_origen() + " -> " + viaje.get_ruta().get_destino());
         System.out.println("Elija un metodo de pago:"+ "\n\t1. Pago con Tarjeta "+"\n\t2. Pago en efectivo");
         int metodoPago = scanner.nextInt();
         scanner.nextLine();
-        
+
         String metodoPagoStr = "";
         if (metodoPago == 1) {
             metodoPagoStr = "Tarjeta";
@@ -132,8 +128,8 @@ public class MenuPasajero {
 
             System.out.println("Boleto comprado exitosamente.");
         } else {
-        System.out.println("Error al comprar el boleto.");
-    }
+            System.out.println("Error al comprar el boleto.");
+        }
     }
 
     public void ver_viaje_actual(Pasajero pasajero){
@@ -165,7 +161,7 @@ public class MenuPasajero {
         System.out.println("Nuevo distrito: ");
         datos.put("distrito", scanner.nextLine());
 
-        boolean exito = pasajeroService.editar_perfil(pasajero, datos);
+        boolean exito = pasajero.editar_perfil(datos);
         if (exito) {
             System.out.println("Cambios hechos satisfactoriamente...");
         } else {
@@ -178,6 +174,6 @@ public class MenuPasajero {
         String origin = scanner.nextLine();
         System.out.print("Ingrese el destino: ");
         String destination = scanner.nextLine();
-        Ruta ruta = rutaService.buscar_ruta(origin, destination);
+        Ruta ruta = Ruta.buscar_ruta(origin, destination);
     }
 }

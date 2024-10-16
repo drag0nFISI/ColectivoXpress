@@ -4,12 +4,10 @@ import Models.Pasajero;
 
 import java.util.HashMap;
 import java.util.Scanner;
-import Services.PasajeroService;
 
 public class IngresoPasajero {
 
     static Scanner sc = new Scanner(System.in);
-    static PasajeroService cs = new PasajeroService();
 
     public static void inicio() {
         IngresoPasajero mc = new IngresoPasajero();
@@ -57,7 +55,7 @@ public class IngresoPasajero {
         System.out.println("Ingrese su DNI: ");
         datos.put("dni", sc.nextLine());
 
-        Pasajero pasajero_existente = cs.cliente_por_dni(datos.get("dni"));
+        Pasajero pasajero_existente = Pasajero.cliente_por_dni(datos.get("dni"));
         if(pasajero_existente !=null){
             System.out.println("DNI ya registrado....");
             return;
@@ -67,7 +65,7 @@ public class IngresoPasajero {
         System.out.println("Ingrese su distrito: ");
         datos.put("distrito", sc.nextLine());
 
-        boolean exito = cs.registro_cliente(datos);
+        boolean exito = Pasajero.registro_cliente(datos);
 
         if(exito){
             System.out.println("Se ha registrado el usuario con exito");
@@ -83,7 +81,7 @@ public class IngresoPasajero {
         String dni = sc.nextLine();
         System.out.print("\nIngrese su contrasena: ");
         String contrasena = sc.nextLine();
-        Pasajero pasajero = cs.login_cliente(dni,contrasena);
+        Pasajero pasajero = Pasajero.login_cliente(dni,contrasena);
         if(pasajero !=null){
             System.out.println("\nLogeado Correctamente");
             MenuPasajero.main(pasajero);

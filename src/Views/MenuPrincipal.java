@@ -13,6 +13,7 @@ public class MenuPrincipal {
             int aux = 0;
             boolean permitido = false;
 
+            System.out.println("\033[2J");
             System.out.println("\n---------- BIENVENIDO AL MENU PRINCIPAL --------");
             System.out.println("\t1. Soy pasajero");
             System.out.println("\t2. Soy conductor");

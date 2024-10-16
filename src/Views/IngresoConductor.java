@@ -1,15 +1,12 @@
 package Views;
 
 import Models.Conductor;
-import Models.Pasajero;
+
 import java.util.Scanner;
-import Repository.ConductorRepository;
-import Services.ConductorService;
 
 public class IngresoConductor {
 
     static Scanner sc = new Scanner(System.in);
-    static ConductorService cs = new ConductorService();
 
     public static void inicio(){
         IngresoConductor ic = new IngresoConductor();
@@ -31,7 +28,7 @@ public class IngresoConductor {
                 stay = false;
                 return;
             }
-            Conductor conductor = cs.login_conductor(dni,contrasena);
+            Conductor conductor = Conductor.login_conductor(dni,contrasena);
             if(conductor !=null){
                 System.out.println("\nLogeado Correctamente");
                 MenuConductor.main(conductor);
