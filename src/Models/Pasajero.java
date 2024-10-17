@@ -1,6 +1,7 @@
 package Models;
 
 import Repository.BoletoRepository;
+import Repository.ConductorRepository;
 import Repository.PasajeroRepository;
 import Repository.ViajeRepository;
 
@@ -23,7 +24,7 @@ public class Pasajero {
     public String distrito;
     public String fecha_nacimiento;
     public String contrasena;
-    public Viaje viaje_actual;
+    public String id_viaje_actual;
     public int numero_viajes;
 
     public static PasajeroRepository pr = new PasajeroRepository();
@@ -36,7 +37,7 @@ public class Pasajero {
         this.fecha_nacimiento = fecha_nacimiento;
         this.distrito = distrito;
         this.contrasena = contrasena;
-        this.viaje_actual = null;
+        this.id_viaje_actual = null;
         this.numero_viajes = 0;
     }
 
@@ -207,20 +208,26 @@ public class Pasajero {
         float precio = viaje.get_precio();
 
         // Crear un nuevo boleto usando el constructor adecuado
-        Boleto boleto = new Boleto(this, viaje, metodoPago, precio);
+        Boleto boleto = new Boleto(this.get_dni(), viaje.get_id(), metodoPago, precio);
 
         // Guardar el boleto en el repositorio
         boolean exito = br.guardar_boleto(boleto);
         if (exito) {
-            this.viaje_actual = viaje;
+            this.id_viaje_actual = viaje.get_id();
+
             PasajeroRepository pr = new PasajeroRepository();
             pr.editar_cliente(this);
             viaje.add_pasajero(this);
+
             ViajeRepository vr = new ViajeRepository();
             vr.editar_viaje(viaje);
-            Pasajero.enviarCorreo(boleto.get_pasajero().get_nombres(), boleto.get_viaje().get_conductor().get_nombres(),
-                    boleto.get_viaje().get_ruta().get_origen()+" -> "+boleto.get_viaje().get_ruta().get_destino(),
-                    Float.toString(boleto.get_viaje().get_ruta().get_precio()), boleto.get_viaje().get_fecha(), boleto.get_id(), this.telefono);
+
+            ConductorRepository cr = new ConductorRepository();
+            Conductor conductor = cr.consultar_credenciales(viaje.get_dni_conductor(), "");
+
+            Pasajero.enviarCorreo(this.get_nombres(), conductor.get_nombres(),
+                    viaje.get_ruta().get_origen()+" -> "+viaje.get_ruta().get_destino(),
+                    Float.toString(viaje.get_ruta().get_precio()), viaje.get_fecha(), boleto.get_id(), this.telefono);
             return true;
         }
         return false;

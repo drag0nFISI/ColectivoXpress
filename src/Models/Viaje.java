@@ -11,15 +11,15 @@ public class Viaje {
     public Ruta ruta;
     public int capacidad_pasajeros;
     public List<Pasajero> pasajeros;
-    public Conductor conductor;
+    public String dni_conductor;
     public float precio;
 
-    public Viaje(String id, String fecha, Ruta ruta, Conductor conductor,  float precio) {
+    public Viaje(String id, String fecha, Ruta ruta, String dni_conductor,  float precio) {
         this.id = id;
         this.fecha = fecha;
         this.ruta = ruta;
 
-        this.conductor = conductor;
+        this.dni_conductor = dni_conductor;
         this.precio = precio;
         this.pasajeros = new ArrayList<>();
     }
@@ -40,8 +40,8 @@ public class Viaje {
     public List<Pasajero> get_pasajeros(){
         return this.pasajeros;
     }
-    public Conductor get_conductor(){
-        return this.conductor;
+    public String get_dni_conductor(){
+        return this.dni_conductor;
     }
     public int get_capacidad_pasajeros(){
         return this.capacidad_pasajeros;
@@ -56,8 +56,8 @@ public class Viaje {
     public void set_ruta(Ruta nueva_ruta){
         this.ruta = nueva_ruta;
     }
-    public void set_conductor(Conductor nuevo_conductor){
-        this.conductor = nuevo_conductor;
+    public void set_conductor(String nuevo_dni_conductor){
+        this.dni_conductor = nuevo_dni_conductor;
     }
     public void set_capacidad_pasajeros(int nueva_cantidad){
         this.capacidad_pasajeros = nueva_cantidad;

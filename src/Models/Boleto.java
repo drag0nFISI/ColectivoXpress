@@ -1,26 +1,29 @@
 package Models;
 
+import Repository.PasajeroRepository;
+import Repository.ViajeRepository;
+
 public class Boleto {
 
-    private Pasajero pasajero;
-    private Viaje viaje;
+    public String dni_pasajero;
+    public String id_viaje;
     private String metodoPago;
     private float precio;
 
     // Constructor que acepta un pasajero, viaje, método de pago y precio
-    public Boleto(Pasajero pasajero, Viaje viaje, String metodoPago, float precio) {
-        this.pasajero = pasajero;
-        this.viaje = viaje;
+    public Boleto(String dni_pasajero, String id_viaje, String metodoPago, float precio) {
+        this.dni_pasajero = dni_pasajero;
+        this.id_viaje = id_viaje;
         this.metodoPago = metodoPago;
         this.precio = precio;
     }
 
-    public Pasajero get_pasajero() {
-        return pasajero;
+    public String get_dni_pasajero() {
+        return dni_pasajero;
     }
 
-    public Viaje get_viaje() {
-        return viaje;
+    public String get_id_viaje() {
+        return id_viaje;
     }
 
     public String get_metodoPago() {
@@ -32,6 +35,10 @@ public class Boleto {
     }
 
     public String get_id() {
+        ViajeRepository vr = new ViajeRepository();
+        Viaje viaje = vr.obtener_viaje(id_viaje);
+        PasajeroRepository pr = new PasajeroRepository();
+        Pasajero pasajero = pr.consultar_credenciales(dni_pasajero, "");
         return viaje.get_id() + "-" + pasajero.get_id();
     }
 }

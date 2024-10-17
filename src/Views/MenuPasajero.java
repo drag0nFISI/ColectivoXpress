@@ -1,13 +1,12 @@
 package Views;
-import Models.Ruta;
-import Models.Viaje;
+import Models.*;
+import Repository.ConductorRepository;
 import Repository.ViajeRepository;
 import Repository.BoletoRepository;
-import Models.Pasajero;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-import Models.Boleto;
 
 // Vista para interactuar con el usuario
 public class MenuPasajero {
@@ -68,6 +67,9 @@ public class MenuPasajero {
         System.out.println("------------ VIAJES DISPONIBLES ------------");
         ViajeRepository vr = new ViajeRepository();
         List<Viaje> viajes = vr.obtener_viajes();
+
+        ConductorRepository cr = new ConductorRepository();
+
         if(viajes == null){
             System.out.println("No hay viajes disponibles...");
             return;
@@ -76,7 +78,7 @@ public class MenuPasajero {
             System.out.print("\n------------ Viaje "+viaje.get_ruta().get_origen());
             System.out.println("-> "+viaje.get_ruta().get_destino()+" -------------");
             System.out.println("ID del viaje: "+viaje.get_id());
-            System.out.println("Nombre del Conductor: "+viaje.get_conductor().get_nombres());
+            System.out.println("Nombre del Conductor: "+cr.consultar_credenciales(viaje.get_dni_conductor(), "").get_nombres());
             System.out.println("Fecha del viaje: "+viaje.get_fecha());
             System.out.println("Precio: "+viaje.get_ruta().get_precio());
             System.out.println("Precio oferta: "+viaje.get_ruta().get_precio_oferta());
@@ -122,7 +124,7 @@ public class MenuPasajero {
         }
 
         float precio = viaje.get_ruta().get_precio(); // Asegúrate de que esto no falle
-        Boleto boleto = new Boleto(pasajero, viaje, metodoPagoStr, precio);
+        Boleto boleto = new Boleto(pasajero.get_dni(), viaje.get_id(), metodoPagoStr, precio);
         BoletoRepository br = new BoletoRepository();
         if (pasajero.generar_boleto(viaje)) {
 
@@ -134,15 +136,19 @@ public class MenuPasajero {
 
     public void ver_viaje_actual(Pasajero pasajero){
         System.out.println("\n----------- VIAJE ACTUAL -----------");
-        Viaje viaje = pasajero.viaje_actual;
+        ViajeRepository vr = new ViajeRepository();
+        Viaje viaje = vr.obtener_viaje(pasajero.id_viaje_actual);
         if(viaje== null){
             System.out.println("No ha comprado boleto para ningun viaje...");
             return;
         }
+
+        ConductorRepository cr = new ConductorRepository();
+
         System.out.print("\n------------ Viaje "+viaje.get_ruta().get_origen());
         System.out.println("-> "+viaje.get_ruta().get_destino()+" -------------");
         System.out.println("ID del viaje: "+viaje.get_id());
-        System.out.println("Nombre del Conductor: "+viaje.get_conductor().get_nombres());
+        System.out.println("Nombre del Conductor: "+cr.consultar_credenciales(viaje.get_dni_conductor(), "").get_nombres());
         System.out.println("Fecha del viaje: "+viaje.get_fecha());
         System.out.println("Precio: "+viaje.get_ruta().get_precio());
         System.out.println("Precio oferta: "+viaje.get_ruta().get_precio_oferta());
@@ -156,7 +162,7 @@ public class MenuPasajero {
         datos.put("nombres", scanner.nextLine());
         System.out.println("Nuevos Apellidos: ");
         datos.put("apellidos", scanner.nextLine());
-        System.out.println("Nuevo telefono: ");
+        System.out.println("Nuevo Correo: ");
         datos.put("telefono", scanner.nextLine());
         System.out.println("Nuevo distrito: ");
         datos.put("distrito", scanner.nextLine());
