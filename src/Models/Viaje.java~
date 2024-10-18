@@ -12,17 +12,22 @@ public class Viaje {
     public int capacidad_pasajeros;
     public List<Pasajero> pasajeros;
     public String dni_conductor;
+    public float precio;
 
-    public Viaje(String id, String fecha, Ruta ruta, String dni_conductor) {
+    public Viaje(String id, String fecha, Ruta ruta, String dni_conductor,  float precio) {
         this.id = id;
         this.fecha = fecha;
         this.ruta = ruta;
 
         this.dni_conductor = dni_conductor;
+        this.precio = precio;
         this.pasajeros = new ArrayList<>();
     }
 
 
+    public float get_precio() {
+        return this.precio;
+    }
     public String get_id(){
         return this.id;
     }

@@ -113,7 +113,7 @@ public class MenuConductor {
                 LocalDate fecha_actual = LocalDate.now();
                 LocalDate fecha_viaje = fecha_actual.plusDays(1);
 
-                Viaje viaje = new Viaje(id, fecha_viaje.toString(), ruta_elegida, conductor.get_dni(), 0);
+                Viaje viaje = new Viaje(id, fecha_viaje.toString(), ruta_elegida, conductor.get_dni());
 
                 vr.guardar_viaje(viaje);
                 conductor.set_viaje_actual(viaje);

@@ -1,0 +1,12 @@
+[
+  {
+    "nombres": "Mihael",
+    "apellidos": "Cristobal",
+    "telefono": "mihael.cristobal@unmsm.edu.pe",
+    "dni": "71632395",
+    "distrito": "Puente Piedra",
+    "fecha_nacimiento": "05/01/2006",
+    "contrasena": "1234",
+    "numero_viajes": 0
+  }
+]

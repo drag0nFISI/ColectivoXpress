@@ -28,6 +28,7 @@ public class Pasajero {
     public int numero_viajes;
 
     public static PasajeroRepository pr = new PasajeroRepository();
+    public static BoletoRepository br = new BoletoRepository();
 
     public Pasajero(String nombres, String apellidos, String telefono, String dni, String fecha_nacimiento, String distrito, String contrasena) {
         this.nombres = nombres;
@@ -179,16 +180,19 @@ public class Pasajero {
     }
 
     // Método para generar un boleto basado en el viaje
-    public boolean generar_boleto(Viaje viaje) {
+    public Boleto generar_boleto(Viaje viaje) {
 
         if (viaje == null) {
-            return false;
+            return null;
+        }
+
+        if(viaje.get_capacidad_pasajeros() == viaje.get_pasajeros().size()){
+            return null;
         }
 
         Random random = new Random();
         String id = "";
 
-        BoletoRepository br = new BoletoRepository();
 
         // Genera ID random con 5 dígitos para el boleto y verifica su unicidad
         boolean encontrado = true;
@@ -203,14 +207,14 @@ public class Pasajero {
             }
         }
 
-        // Definir el método de pago y precio del boleto
-        String metodoPago = "Tarjeta";
-        float precio = viaje.get_precio();
+        float precio = viaje.get_ruta().get_precio();
 
         // Crear un nuevo boleto usando el constructor adecuado
-        Boleto boleto = new Boleto(this.get_dni(), viaje.get_id(), metodoPago, precio);
+        Boleto boleto = new Boleto(this.get_dni(), viaje.get_id(), "MercadoPago", precio);
+        return boleto;
+    }
 
-        // Guardar el boleto en el repositorio
+    public boolean guardar_boleto(Boleto boleto, Viaje viaje){
         boolean exito = br.guardar_boleto(boleto);
         if (exito) {
             this.id_viaje_actual = viaje.get_id();
@@ -232,6 +236,7 @@ public class Pasajero {
         }
         return false;
     }
+
 
     // Métodos getters para obtener la información del pasajero
     public String get_nombres() {

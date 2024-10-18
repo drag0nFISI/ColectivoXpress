@@ -3,9 +3,12 @@ import Models.*;
 import Repository.ConductorRepository;
 import Repository.ViajeRepository;
 import Repository.BoletoRepository;
+import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.Preference;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 // Vista para interactuar con el usuario
@@ -86,6 +89,8 @@ public class MenuPasajero {
     }
 
     public void comprar_boleto(Pasajero pasajero){
+        ver_viajes_disponibles();
+
         System.out.println("\n----------- COMPRAR BOLETO -----------");
         System.out.println("Ingrese ID del viaje: ");
         String id_viaje = scanner.nextLine();
@@ -100,20 +105,7 @@ public class MenuPasajero {
         }
 
 
-        System.out.println("La ruta elegida es: " + viaje.get_ruta().get_origen() + " -> " + viaje.get_ruta().get_destino());
-        System.out.println("Elija un metodo de pago:"+ "\n\t1. Pago con Tarjeta "+"\n\t2. Pago en efectivo");
-        int metodoPago = scanner.nextInt();
-        scanner.nextLine();
 
-        String metodoPagoStr = "";
-        if (metodoPago == 1) {
-            metodoPagoStr = "Tarjeta";
-        } else if (metodoPago == 2) {
-            metodoPagoStr = "Efectivo";
-        } else {
-            System.out.println("Opción inválida.");
-            return;
-        }
         if (pasajero == null) {
             System.out.println("Error: Pasajero nulo.");
             return;
@@ -123,11 +115,48 @@ public class MenuPasajero {
             return;
         }
 
-        float precio = viaje.get_ruta().get_precio(); // Asegúrate de que esto no falle
-        Boleto boleto = new Boleto(pasajero.get_dni(), viaje.get_id(), metodoPagoStr, precio);
-        BoletoRepository br = new BoletoRepository();
-        if (pasajero.generar_boleto(viaje)) {
+        System.out.println("La ruta elegida es: " + viaje.get_ruta().get_origen() + " -> " + viaje.get_ruta().get_destino());
+        System.out.println("A continuación se procederá con el pago...");
+        Boleto boleto_creado = pasajero.generar_boleto(viaje);
+        if(boleto_creado == null){
+            System.out.println("No es posible comprar un boleto para este viaje actualmente");
+            return;
+        }
 
+        try {
+            PagoMP.init();
+            String descripcion = "Viaje "+viaje.get_ruta().get_origen()+" -> "+viaje.get_ruta().get_destino();
+            float precio = viaje.get_ruta().get_precio();
+            String correo = pasajero.get_telefono();
+            Preference preference = PagoMP.crearPreferencia(boleto_creado.get_id(), descripcion, precio, correo);
+
+            System.out.println("Se le enviara a una página a completar el pago...");
+            System.out.println("Una vez culmine el pago, debera regresar y presionar ENTER para confirmarlo");
+            Thread.sleep(1000);
+
+            PagoMP.redirigirAWeb(preference);
+            boolean pago_exitoso = false;
+            while(!pago_exitoso){
+                System.out.println("En caso de querer cancelar la compra, escriba SALIR");
+                System.out.println("PRESIONE ENTER PARA VERIFICAR EL PAGO...");
+                String aux = scanner.nextLine();
+                if(aux.equals("SALIR")){
+                    System.out.println("Compra cancelada...");
+                    return;
+                }
+                pago_exitoso = PagoMP.verificarEstadoPago(preference.getExternalReference());
+                if(pago_exitoso){
+                    System.out.println("Transacción exitosa");
+                    System.out.println("Espere un momento...");
+                }
+            }
+        } catch (MPException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (pasajero.guardar_boleto(boleto_creado, viaje)) {
             System.out.println("Boleto comprado exitosamente.");
         } else {
             System.out.println("Error al comprar el boleto.");

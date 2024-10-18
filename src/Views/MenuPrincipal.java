@@ -1,4 +1,7 @@
 package Views;
+import Models.PagoMP;
+import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.Preference;
 
 import java.util.Scanner;
 
@@ -6,6 +9,27 @@ import java.util.Scanner;
 public class MenuPrincipal {
 
     static Scanner sc = new Scanner(System.in);
+
+
+
+    public static void test(String titulo, String descripcion, String correo, double precio){
+        try {
+            // Inicializar Mercado Pago
+            PagoMP.init();
+
+            // Crear la preferencia de pago
+            Preference preference = PagoMP.crearPreferencia(titulo, descripcion, precio, correo);
+
+            // Redirigir al usuario a Mercado Pago
+            PagoMP.redirigirAWeb(preference);
+            System.out.println("PRESIONE ENTER PARA VERIFICAR EL PAGO");
+            sc.nextLine();
+            sc.nextLine();
+            PagoMP.verificarEstadoPago(preference.getExternalReference());
+        } catch (MPException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         while (true) {

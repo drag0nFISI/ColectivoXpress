@@ -6,11 +6,23 @@
       "origen": "Lima",
       "destino": "Tacna",
       "tiempo_aproximado": "10h",
-      "precio": 120.0,
+      "precio": 3.0,
       "precio_oferta": 0.0
     },
-    "capacidad_pasajeros": 0,
-    "pasajeros": [],
+    "capacidad_pasajeros": 10,
+    "pasajeros": [
+      {
+        "nombres": "Mihael",
+        "apellidos": "Cristobal",
+        "telefono": "mihael.cristobal@unmsm.edu.pe",
+        "dni": "71632395",
+        "distrito": "Puente Piedra",
+        "fecha_nacimiento": "05/01/2006",
+        "contrasena": "1234",
+        "id_viaje_actual": "68327",
+        "numero_viajes": 0
+      }
+    ],
     "dni_conductor": "12345678",
     "precio": 0.0
   }

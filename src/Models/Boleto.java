@@ -1,5 +1,7 @@
 package Models;
 
+import Repository.BoletoRepository;
+import Repository.ConductorRepository;
 import Repository.PasajeroRepository;
 import Repository.ViajeRepository;
 

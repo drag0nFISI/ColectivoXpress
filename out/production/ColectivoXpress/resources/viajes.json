@@ -1,0 +1,17 @@
+[
+  {
+    "id": "68327",
+    "fecha": "2024-10-18",
+    "ruta": {
+      "origen": "Lima",
+      "destino": "Tacna",
+      "tiempo_aproximado": "10h",
+      "precio": 3.0,
+      "precio_oferta": 0.0
+    },
+    "capacidad_pasajeros": 10,
+    "pasajeros": [],
+    "dni_conductor": "12345678",
+    "precio": 0.0
+  }
+]
