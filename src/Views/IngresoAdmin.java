@@ -18,23 +18,35 @@ public class IngresoAdmin {
 
         while(stay){
 
-            System.out.println("\n----------------LOGIN DE ADMIN-------------");
-            System.out.println("PARA VOLVER ATRAS DEJE VACIOS LOS CAMPOS DE CODIGO Y CONTRASENA");
-            System.out.print("Ingrese su codigo: ");
+            Consola.cls();
+            Consola.dibujar_rectangulo(42, 9, 20, 5);
+            Consola.gotoxy(34, 5);
+            System.out.print(" LOGIN DE ADMIN ");
+            Consola.gotoxy(22, 7);
+            System.out.print("Si desea salir deje ambos campos vacios");
+            Consola.gotoxy(22, 10);
+            System.out.print("Ingrese su Codigo: ");
+            Consola.gotoxy(22, 12);
+            System.out.print("Ingrese su Contrasena: ");
+
+            Consola.gotoxy(41, 10);
             String codigo = sc.nextLine();
-            System.out.print("\nIngrese su contrasena: ");
+            Consola.gotoxy(45, 12);
             String contrasena = sc.nextLine();
 
-            if(codigo.equals("") && contrasena.equals("")){
+            if(codigo.isEmpty() && contrasena.isEmpty()){
                 return;
             }
             Admin admin = Admin.login_admin(codigo,contrasena);
             if(admin != null){
-                System.out.println("\nLogeado Correctamente");
                 stay = false;
                 MenuAdmin.main(admin);
             } else {
-                System.out.println("\nError al logearse");
+                Consola.gotoxy(33, 16);
+                System.out.print("Error al logearse");
+                Consola.gotoxy(23, 17);
+                System.out.print("Presione ENTER para volver a intentarlo");
+                sc.nextLine();
             }
         }
     }

@@ -15,25 +15,37 @@ public class IngresoConductor {
 
     public void login_conductor(){
         boolean stay = true;
-
         while (stay) {
 
-            System.out.println("\n----------------LOGIN DE CONDUCTOR-------------");
-            System.out.println("PARA VOLVER ATRAS DEJE VACIOS LOS CAMPOS DE DNI Y CONTRASENA");
+            Consola.cls();
+            Consola.dibujar_rectangulo(42, 9, 20, 5);
+            Consola.gotoxy(32, 5);
+            System.out.print(" LOGIN DE CONDUCTOR ");
+            Consola.gotoxy(22, 7);
+            System.out.print("Si desea salir deje ambos campos vacios");
+            Consola.gotoxy(22, 10);
             System.out.print("Ingrese su DNI: ");
+            Consola.gotoxy(22, 12);
+            System.out.print("Ingrese su Contrasena: ");
+
+            Consola.gotoxy(38, 10);
             String dni = sc.nextLine();
-            System.out.print("\nIngrese su contrasena: ");
+            Consola.gotoxy(45, 12);
             String contrasena = sc.nextLine();
-            if(dni.equals("") && contrasena.equals("")) {
-                stay = false;
+
+            if(dni.isEmpty() && contrasena.isEmpty()) {
                 return;
             }
             Conductor conductor = Conductor.login_conductor(dni,contrasena);
             if(conductor !=null){
-                System.out.println("\nLogeado Correctamente");
+                stay = false;
                 MenuConductor.main(conductor);
             } else {
-                System.out.println("\nError al logearse");
+                Consola.gotoxy(33, 16);
+                System.out.print("Error al logearse");
+                Consola.gotoxy(23, 17);
+                System.out.print("Presione ENTER para volver a intentarlo");
+                sc.nextLine();
             }
         }
     }

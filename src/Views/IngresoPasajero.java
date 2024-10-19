@@ -16,14 +16,34 @@ public class IngresoPasajero {
         boolean stay = true;
 
         while(stay){
-            System.out.println("\n----------- INGRESO DE PASAJERO ---------");
-            System.out.println("Seleccione lo que desea hacer: ");
-            System.out.println("1. Registrarme");
-            System.out.println("2. Login");
-            System.out.println("3. Salir");
-            System.out.print("Ingrese su opcion: ");
-            aux = sc.nextInt();
-            sc.nextLine();
+            Consola.cls();
+
+            Consola.dibujar_rectangulo(31, 7, 20, 5);
+            Consola.gotoxy(26, 5);
+            System.out.print(" INGRESO DE PASAJERO ");
+            Consola.gotoxy(22, 7);
+            System.out.print("1. Registrarme");
+            Consola.gotoxy(22, 8);
+            System.out.print("2. Login");
+            Consola.gotoxy(22, 9);
+            System.out.print("3. Salir");
+
+            boolean permitido = false;
+            while (!permitido) {
+                try {
+                    Consola.gotoxy(22, 11);
+                    System.out.print("Ingrese su opcion: ");
+                    aux = sc.nextInt();
+                    permitido = true;
+                } catch (Exception e) {
+                    Consola.gotoxy(41, 11);
+                    System.out.print("           ");
+                    Consola.gotoxy(26, 14);
+                    System.out.print("Opcion no valida");
+                    sc.nextLine();
+                }
+            }
+
             switch (aux){
                 case 1:
                     mc.registrar_cliente();

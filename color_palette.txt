@@ -1,0 +1,7 @@
+Color Palette
+Aquí tienes una pequeña referencia de colores de 256:
+
+Colores básicos (0-7): Colores estándar (negro, rojo, verde, amarillo, azul, magenta, cyan, blanco).
+Colores brillantes (8-15): Colores brillantes correspondientes a los colores básicos.
+Colores en gradiente (16-231): Colores en una gama de colores más amplia (un total de 216 colores).
+Colores en escala de grises (232-255): 24 colores en escala de grises.

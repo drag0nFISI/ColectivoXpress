@@ -1,0 +1,4 @@
+javac -d out -sourcepath src -cp "libs/*" src/Models/Admin.java src/Models/Boleto.java src/Models/Conductor.java src/Models/PagoMP.java src/Models/Pasajero.java src/Models/Ruta.java src/Models/Viaje.java src/Repository/AdminRepository.java src/Repository/BoletoRepository.java src/Repository/ConductorRepository.java src/Repository/PasajeroRepository.java src/Repository/RutaRepository.java src/Repository/ViajeRepository.java src/Views/IngresoAdmin.java src/Views/IngresoConductor.java src/Views/IngresoPasajero.java src/Views/MenuAdmin.java src/Views/MenuConductor.java src/Views/MenuPasajero.java src/Views/MenuPrincipal.java
+
+
+java -cp "out;libs/*" Views.MenuPrincipal
