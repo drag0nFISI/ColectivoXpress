@@ -107,12 +107,10 @@ public class RutaRepository {
 
         for(Ruta ruta:rutas){
             if(ruta.get_origen().equals(origen) && ruta.get_destino().equals(destino)){
-                System.out.println("Se encontro la ruta");
                 return ruta;
             }
         }
 
-        System.out.println("no se encontro la ruta");
         return null;
     }
 

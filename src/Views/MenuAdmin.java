@@ -179,88 +179,112 @@ public class MenuAdmin {
 
         HashMap<String, String> datos = new HashMap<>();
 
-        Consola.dibujar_rectangulo(40, 9, 14, 11);
-        Consola.gotoxy(25, 11);
+        Consola.dibujar_rectangulo(40, 9, 4, 11);
+        Consola.gotoxy(15, 11);
         System.out.print(" INFORMACION ACTUAL ");
-        Consola.gotoxy(16, 13);
+        Consola.gotoxy(6, 13);
         System.out.print("DNI: " + conductor_existente.get_dni());
-        Consola.gotoxy(16, 14);
+        Consola.gotoxy(6, 14);
         System.out.print("Nombres: " + conductor_existente.get_nombres());
-        Consola.gotoxy(16, 15);
+        Consola.gotoxy(6, 15);
         System.out.print("Apellidos: " + conductor_existente.get_apellidos());
-        Consola.gotoxy(16, 16);
+        Consola.gotoxy(6, 16);
         System.out.print("Telefono: " + conductor_existente.get_telefono());
-        Consola.gotoxy(16, 17);
+        Consola.gotoxy(6, 17);
         System.out.println("Fecha de Nacimiento: " + conductor_existente.get_fecha_nacimiento());
-        Consola.gotoxy(16, 18);
+        Consola.gotoxy(6, 18);
         System.out.print("Distrito: " + conductor_existente.get_distrito());
-        Consola.gotoxy(16, 19);
+        Consola.gotoxy(6, 19);
         System.out.print("Dias de descanso: ");
         for(String dia: conductor_existente.get_dias_descanso()){
             System.out.print(dia + ", ");
         }
 
-        Consola.dibujar_rectangulo(50, 8, 62, 11);
-        Consola.gotoxy(80, 11);
+        Consola.dibujar_rectangulo(50, 8, 52, 11);
+        Consola.gotoxy(70, 11);
         System.out.print(" MODIFICACIONES ");
-        Consola.gotoxy(64, 13);
+        Consola.gotoxy(54, 13);
         System.out.print("Si no desea modificar algun campo presione ENTER");
 
-        Consola.gotoxy(64, 15);
+        Consola.gotoxy(54, 15);
         System.out.print("Nuevos nombres: ");
-        Consola.gotoxy(64, 16);
+        Consola.gotoxy(54, 16);
         System.out.print("Nuevos Apellidos: ");
-        Consola.gotoxy(64, 17);
+        Consola.gotoxy(54, 17);
         System.out.print("Nuevo telefono: ");
-        Consola.gotoxy(64, 18);
+        Consola.gotoxy(54, 18);
         System.out.print("Nuevo distrito: ");
 
-        Consola.gotoxy(80, 15);
+        Consola.gotoxy(70, 15);
         datos.put("nombres", sc.nextLine());
-        Consola.gotoxy(82, 16);
+        Consola.gotoxy(72, 16);
         datos.put("apellidos", sc.nextLine());
-        Consola.gotoxy(80, 17);
+        Consola.gotoxy(70, 17);
         datos.put("telefono", sc.nextLine());
-        Consola.gotoxy(80, 18);
+        Consola.gotoxy(70, 18);
         datos.put("distrito", sc.nextLine());
 
         boolean exito = conductor_existente.editar_perfil(datos);
 
         if(!exito){
-            Consola.gotoxy(45, 23);
+            Consola.gotoxy(35, 23);
             System.out.print("No se ha podido modificar el perfil");
-            Consola.gotoxy(42, 24);
+            Consola.gotoxy(32, 24);
             System.out.print("Presione ENTER para continuar");
             sc.nextLine();
             return;
         }
 
-        Consola.gotoxy(42, 23);
+        Consola.gotoxy(32, 23);
         System.out.print("Perfil modificado exitosamente");
-        Consola.gotoxy(42, 24);
+        Consola.gotoxy(32, 24);
         System.out.print("Presione ENTER para continuar");
         sc.nextLine();
     }
 
     public void eliminar_conductor(){
-        System.out.println("\n------------ ELIMINAR CONDUCTOR -----------");
-        System.out.println("Ingrese el dni del conductor: ");
+
+        Consola.cls();
+        Consola.dibujar_rectangulo(40, 3, 25, 5);
+        Consola.gotoxy(36, 5);
+        System.out.print(" ELIMINAR CONDUCTOR ");
+        Consola.gotoxy(27, 7);
+        System.out.print("DNI: ");
+        Consola.gotoxy(32, 7);
         String dni = sc.nextLine();
 
         boolean exito = Conductor.eliminar_conductor(dni);
         if(exito){
-            System.out.println("CONDUCTOR ELIMINADO");
+            Consola.gotoxy(35, 11);
+            System.out.print("CONDUCTOR ELIMINADO");
         } else {
-            System.out.println("OCURRIO UN ERROR");
+            Consola.gotoxy(28, 11);
+            System.out.print("NO SE PUDO ELIMINAR AL CONDUCTOR");
         }
+        Consola.gotoxy(30, 12);
+        System.out.print("Presione ENTER para continuar");
+        sc.nextLine();
     }
 
     public void agregar_ruta(){
         HashMap<String, String> datos = new HashMap<>();
-        System.out.println("\n---------- AGREGAR RUTA ----------");
+
+        Consola.cls();
+        Consola.dibujar_rectangulo(42, 6, 20, 5);
+        Consola.gotoxy(32, 5);
+        System.out.print(" AGREGAR UNA RUTA ");
+        Consola.gotoxy(22, 7);
         System.out.print("Origen: ");
-        datos.put("origen", sc.nextLine());
+        Consola.gotoxy(22, 8);
         System.out.print("Destino: ");
+        Consola.gotoxy(22, 9);
+        System.out.print("Precio: ");
+        Consola.gotoxy(22, 10);
+        System.out.print("Tiempo aprox. viaje: ");
+
+        Consola.gotoxy(30, 7);
+        datos.put("origen", sc.nextLine());
+        Consola.gotoxy(31, 8);
         datos.put("destino", sc.nextLine());
 
         Ruta ruta_existente = Ruta.buscar_ruta(datos.get("origen"), datos.get("destino"));
@@ -269,66 +293,128 @@ public class MenuAdmin {
             return;
         }
 
-        System.out.print("Precio: ");
+        Consola.gotoxy(30, 9);
         datos.put("precio", sc.nextLine());
-        System.out.print("Tiempo aproximado de viaje: ");
+        Consola.gotoxy(43, 10);
         datos.put("tiempo_aproximado", sc.nextLine());
+
         boolean exito = Ruta.agregar_ruta(datos);
         if(exito){
-            System.out.println("SE AÑADIO LA RUTA CON EXITO\n");
+            Consola.gotoxy(28, 14);
+            System.out.print("SE AÑADIO LA RUTA CON EXITO");
         } else {
-            System.out.println("OCURRIO UN ERROR, NO SE PUDO ANADIR LA RUTA\n");
+            Consola.gotoxy(20, 14);
+            System.out.print("OCURRIO UN ERROR, NO SE PUDO ANADIR LA RUTA");
         }
+        Consola.gotoxy(27, 15);
+        System.out.print("Presione ENTER para continuar");
+        sc.nextLine();
     }
 
     public void editar_ruta(){
-        System.out.println("\n-------------- EDITAR RUTA --------------");
-        System.out.println("Ingrese los datos de la ruta que quiere editar...");
+
+        Consola.cls();
+        Consola.dibujar_rectangulo(42, 4, 20, 5);
+        Consola.gotoxy(34, 5);
+        System.out.print(" EDITAR RUTA ");
+        Consola.gotoxy(22, 7);
         System.out.print("Origen: ");
-        String origen = sc.nextLine();
+        Consola.gotoxy(22, 8);
         System.out.print("Destino: ");
+
+        Consola.gotoxy(30, 7);
+        String origen = sc.nextLine();
+        Consola.gotoxy(31, 8);
         String destino = sc.nextLine();
+
         Ruta ruta = Ruta.buscar_ruta(origen, destino);
         if(ruta==null){
-            System.out.println("ESTA RUTA NO EXISTE...");
+            Consola.gotoxy(30, 12);
+            System.out.print("ESTA RUTA NO EXISTE...");
+            Consola.gotoxy(26, 13);
+            System.out.print("Presione ENTER para continuar");
+            sc.nextLine();
             return;
         }
 
-        System.out.println("\nInserte los datos a cambiar, si no quiere modificar\nun apartado solo presione ENTER...");
+        Consola.dibujar_rectangulo(40, 5, 4, 11);
+        Consola.gotoxy(15, 11);
+        System.out.print(" INFORMACION ACTUAL ");
+        Consola.gotoxy(6, 13);
+        System.out.print("Precio Regular: " + ruta.get_precio());
+        Consola.gotoxy(6, 14);
+        System.out.print("Precio Oferta: " + ruta.get_precio_oferta());
+        Consola.gotoxy(6, 15);
+        System.out.print("Tiempo Aprox. Viaje: " + ruta.get_tiempo_aproximado());
+
+        Consola.dibujar_rectangulo(50, 8, 52, 11);
+        Consola.gotoxy(70, 11);
+        System.out.print(" MODIFICACIONES ");
+        Consola.gotoxy(54, 13);
+        System.out.print("Si no desea modificar algun campo presione ENTER");
 
         HashMap<String, String> datos = new HashMap<>();
-        System.out.print("Precio Regular: ");
+
+        Consola.gotoxy(54, 15);
+        System.out.print("Nuevo Precio Regular: ");
+        Consola.gotoxy(54, 16);
+        System.out.print("Nuevo Precio Oferta: ");
+        Consola.gotoxy(54, 17);
+        System.out.print("Nuevo Tiempo Aprox. Viaje: ");
+
+        Consola.gotoxy(76, 15);
         datos.put("precio", sc.nextLine());
-        System.out.println("Precio de oferta: ");
+        Consola.gotoxy(75, 16);
         datos.put("precio_oferta", sc.nextLine());
-        System.out.print("Tiempo aproximado de viaje: ");
+        Consola.gotoxy(81, 17);
         datos.put("tiempo_aproximado", sc.nextLine());
 
         boolean exito = ruta.editar_ruta(datos);
-        if(exito){
-            System.out.println("CAMBIADO EXITOSAMENTE");
-        } else {
-            System.out.println("NO SE PUDO EDITAR LA RUTA");
+
+        if(!exito){
+            Consola.gotoxy(36, 23);
+            System.out.print("No se ha podido modificar la ruta");
+            Consola.gotoxy(32, 24);
+            System.out.print("Presione ENTER para continuar");
+            sc.nextLine();
+            return;
         }
+
+        Consola.gotoxy(33, 23);
+        System.out.print("Ruta modificada exitosamente");
+        Consola.gotoxy(32, 24);
+        System.out.print("Presione ENTER para continuar");
+        sc.nextLine();
     }
 
     public void eliminar_ruta(){
-        String origen;
-        String destino;
-
-        System.out.println("\n---------- ELIMINAR RUTA ----------");
-        System.out.println("Ingrese los datos de la ruta a eliminar: ");
+        Consola.cls();
+        Consola.dibujar_rectangulo(42, 6, 20, 5);
+        Consola.gotoxy(33, 5);
+        System.out.print(" ELIMINAR RUTA ");
+        Consola.gotoxy(22, 7);
+        System.out.print("Ingrese los datos de la ruta a eliminar");
+        Consola.gotoxy(22, 9);
         System.out.print("Origen: ");
-        origen = sc.nextLine();
+        Consola.gotoxy(22, 10);
         System.out.print("Destino: ");
-        destino = sc.nextLine();
+
+        Consola.gotoxy(30, 9);
+        String origen = sc.nextLine();
+        Consola.gotoxy(31, 10);
+        String destino = sc.nextLine();
 
         boolean exito = Ruta.eliminar_ruta(origen, destino);
         if(exito){
-            System.out.println("RUTA ELIMINADA CON EXITO");
+            Consola.gotoxy(29, 14);
+            System.out.print("RUTA ELIMINADA CON EXITO");
         } else {
-            System.out.println("NO SE PUDO ELIMINAR LA RUTA");
+            Consola.gotoxy(27, 14);
+            System.out.print("NO SE PUDO ELIMINAR LA RUTA");
         }
+        Consola.gotoxy(26, 15);
+        System.out.print("Presione ENTER para continuar");
+        sc.nextLine();
     }
 
     public void mostrar_rutas(){
@@ -336,15 +422,50 @@ public class MenuAdmin {
     }
 
     public void editar_configuraciones(){
-        System.out.println("\n-------------- EDITAR CONFIGURACIONES --------------");
-        System.out.println("Editar numero de dias de descanso de trabajadores: ");
-        System.out.println("Insertar cantidad de dias: ");
-        int limite_dias_descanso = sc.nextInt();
-        boolean exito = Conductor.editar_limite_dias_descanso(limite_dias_descanso);
-        if(exito){
-            System.out.println("Limite de dias de descanso cambiado con exito");
-        } else {
-            System.out.println("NO SE PUDO CAMBIAR EL LIMITE");
+
+        Consola.cls();
+        Consola.dibujar_rectangulo(50, 5, 20, 5);
+        Consola.gotoxy(33, 5);
+        System.out.print(" EDITAR CONFIGURACIONES ");
+        Consola.gotoxy(22, 7);
+        System.out.print("Editar numero de dias de descanso de conductores");
+        Consola.gotoxy(22, 9);
+        System.out.print("Insertar cantidad de dias: ");
+
+        int limite_dias_descanso;
+
+        while(true){
+            try{
+                Consola.gotoxy(49, 9);
+                limite_dias_descanso = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+                Consola.gotoxy(35, 13);
+                System.out.print("Ingrese un valor valido");
+                Consola.gotoxy(32, 14);
+                System.out.print("Presione ENTER para continuar...");
+                sc.nextLine();
+                Consola.gotoxy(49, 9);
+                System.out.print("                ");
+                Consola.gotoxy(35, 13);
+                System.out.print("                       ");
+                Consola.gotoxy(32, 14);
+                System.out.print("                                ");
+            }
         }
+
+        boolean exito = Conductor.editar_limite_dias_descanso(limite_dias_descanso);
+        sc.nextLine();
+        if(exito){
+            Consola.gotoxy(27, 13);
+            System.out.print("Limite de dias de descanso cambiado con exito");
+        } else {
+            Consola.gotoxy(35, 13);
+            System.out.print("NO SE PUDO CAMBIAR EL LIMITE");
+        }
+        Consola.gotoxy(32, 14);
+        System.out.print("Presione ENTER para continuar...");
+        sc.nextLine();
     }
 }

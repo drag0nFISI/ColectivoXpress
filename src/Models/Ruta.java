@@ -1,9 +1,11 @@
 package Models;
 
 import Repository.RutaRepository;
+import Views.Consola;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ruta {
 
@@ -50,16 +52,35 @@ public class Ruta {
     public static void mostrar_rutas(){
 
         List<Ruta> rutas = rr.obtener_rutas();
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println("\n--------- RUTAS ----------");
+        Consola.cls();
+
+        Consola.gotoxy(55, 2);
+        System.out.print("Rutas");
+
+        int aux = 1;
+
         for(Ruta ruta:rutas){
-            System.out.println("---------------------------");
-            System.out.println("Origen: "+ruta.origen);
-            System.out.println("Destino: "+ruta.destino);
-            System.out.println("Tiempo aproximado: "+ruta.tiempo_aproximado);
-            System.out.println("Precio: "+ruta.precio);
-            System.out.println("Precio Oferta: "+ruta.precio_oferta);
+            Consola.dibujar_boton(20, 1, 5, 4+(2*aux), ruta.get_origen());
+            Consola.dibujar_boton(20, 1, 26, 4+(2*aux), ruta.get_destino());
+            Consola.dibujar_boton(20, 1, 47, 4+(2*aux), ruta.get_tiempo_aproximado());
+            Consola.dibujar_boton(20, 1, 68, 4+(2*aux), Float.toString(ruta.get_precio()));
+            Consola.dibujar_boton(20, 1, 89, 4+(2*aux), Float.toString(ruta.get_precio_oferta()));
+
+            aux += 1;
         }
+        Consola.change_color(7, 18);
+        Consola.dibujar_boton(20, 1, 5, 4, "Origen");
+        Consola.dibujar_boton(20, 1, 26, 4, "Destino");
+        Consola.dibujar_boton(20, 1, 47, 4, "Tiempo Aprox. Viaje");
+        Consola.dibujar_boton(20, 1, 68, 4, "Precio Regular");
+        Consola.dibujar_boton(20, 1, 89, 4, "Precio Oferta");
+        Consola.reset_color();
+
+        Consola.gotoxy(80, 2);
+        System.out.print("Presione ENTER para continuar...");
+        sc.nextLine();
     }
 
     public static Ruta buscar_ruta(String origen, String destino){
@@ -70,21 +91,20 @@ public class Ruta {
 
         boolean eliminar = rr.eliminar_ruta(this.origen, this.destino);
         if(!eliminar){
-            System.out.println("no se pudo eliminar");
             return false;
         }
 
-        this.set_tiempo_aproximado(datos.get("tiempo_aproximado"));
-        this.set_precio(Float.parseFloat(datos.get("precio")));
-        this.set_precio_oferta(Float.parseFloat(datos.get("precio_oferta")));
-
-        boolean guardar = rr.guardar_ruta(this);
-        if(!guardar){
-            System.out.println("no se pudo guardar");
-            return false;
+        if(!datos.get("tiempo_aproximado").isEmpty()){
+            this.set_tiempo_aproximado(datos.get("tiempo_aproximado"));
+        }
+        if(!datos.get("precio").isEmpty()){
+            this.set_precio(Float.parseFloat(datos.get("precio")));
+        }
+        if(!datos.get("precio_oferta").isEmpty()){
+            this.set_precio_oferta(Float.parseFloat(datos.get("precio_oferta")));
         }
 
-        return true;
+        return rr.guardar_ruta(this);
     }
 
 
