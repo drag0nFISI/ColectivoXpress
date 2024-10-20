@@ -9,5 +9,15 @@
     "contrasena": "1234",
     "id_viaje_actual": "68327",
     "numero_viajes": 0
+  },
+  {
+    "nombres": "",
+    "apellidos": "",
+    "telefono": "",
+    "dni": "",
+    "distrito": "",
+    "fecha_nacimiento": "",
+    "contrasena": "",
+    "numero_viajes": 0
   }
 ]

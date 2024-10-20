@@ -63,50 +63,99 @@ public class IngresoPasajero {
 
     public void registrar_cliente(){
         HashMap<String, String> datos = new HashMap<String, String>();
-        System.out.println("\n--------------BIENVENIDO AL REGISTRO DE PASAJERO------------");
-        System.out.println("Ingrese su nombre: ");
-        datos.put("nombres", sc.nextLine());
-        System.out.println("Ingrese su apellido: ");
-        datos.put("apellidos", sc.nextLine());
-        System.out.println("Ingrese su gmail: ");
-        datos.put("telefono", sc.nextLine());
-        System.out.println("Ingrese su contrasena: ");
-        datos.put("contrasena", sc.nextLine());
-        System.out.println("Ingrese su DNI: ");
+
+        Consola.cls();
+        sc.nextLine();
+        Consola.dibujar_rectangulo(36, 9, 20, 5);
+        Consola.gotoxy(28, 5);
+        System.out.print(" REGISTRO DE PASAJERO ");
+        Consola.gotoxy(22, 7);
+        System.out.print("DNI: ");
+        Consola.gotoxy(22, 8);
+        System.out.print("Nombre: ");
+        Consola.gotoxy(22, 9);
+        System.out.print("Apellido: ");
+        Consola.gotoxy(22, 10);
+        System.out.print("Correo: ");
+        Consola.gotoxy(22, 11);
+        System.out.print("Contrasena: ");
+        Consola.gotoxy(22, 12);
+        System.out.print("Fecha de nacimiento: ");
+        Consola.gotoxy(22, 13);
+        System.out.print("Distrito: ");
+
+        Consola.gotoxy(27, 7);
         datos.put("dni", sc.nextLine());
 
         Pasajero pasajero_existente = Pasajero.cliente_por_dni(datos.get("dni"));
         if(pasajero_existente !=null){
-            System.out.println("DNI ya registrado....");
+            Consola.gotoxy(29, 17);
+            System.out.print("DNI ya registrado...");
+            Consola.gotoxy(24, 18);
+            System.out.print("Presione ENTER para continuar");
+            sc.nextLine();
             return;
         }
-        System.out.println("Ingrese su fecha de nacimiento: ");
+
+        Consola.gotoxy(30, 8);
+        datos.put("nombres", sc.nextLine());
+        Consola.gotoxy(32, 9);
+        datos.put("apellidos", sc.nextLine());
+        Consola.gotoxy(30, 10);
+        datos.put("telefono", sc.nextLine());
+        Consola.gotoxy(34, 11);
+        datos.put("contrasena", sc.nextLine());
+        Consola.gotoxy(43, 12);
         datos.put("fecha_nacimiento", sc.nextLine());
-        System.out.println("Ingrese su distrito: ");
+        Consola.gotoxy(32, 13);
         datos.put("distrito", sc.nextLine());
 
         boolean exito = Pasajero.registro_cliente(datos);
 
         if(exito){
-            System.out.println("Se ha registrado el usuario con exito");
+            Consola.gotoxy(20, 17);
+            System.out.print("Se ha registrado el usuario con exito");
         } else {
-            System.out.println("No se ha podido registrar al usuario");
+            Consola.gotoxy(21, 17);
+            System.out.print("No se ha podido registrar al usuario");
         }
-        datos = null;
+        Consola.gotoxy(24, 18);
+        System.out.print("Presione ENTER para continuar");
+        sc.nextLine();
     }
 
     public void login_cliente(){
-        System.out.println("\n----------------LOGIN DE PASAJERO-------------");
+
+        Consola.cls();
+        sc.nextLine();
+        Consola.dibujar_rectangulo(42, 7, 20, 5);
+        Consola.gotoxy(32, 5);
+        System.out.print(" LOGIN DE PASAJERO ");
+        Consola.gotoxy(22, 7);
+        System.out.print("Si desea salir deje ambos campos vacios");
+        Consola.gotoxy(22, 9);
         System.out.print("Ingrese su DNI: ");
+        Consola.gotoxy(22, 11);
+        System.out.print("Ingrese su Contrasena: ");
+
+        Consola.gotoxy(38, 9);
         String dni = sc.nextLine();
-        System.out.print("\nIngrese su contrasena: ");
+        Consola.gotoxy(45, 11);
         String contrasena = sc.nextLine();
+
+        if(dni.isEmpty() && contrasena.isEmpty()) {
+            return;
+        }
+
         Pasajero pasajero = Pasajero.login_cliente(dni,contrasena);
         if(pasajero !=null){
-            System.out.println("\nLogeado Correctamente");
             MenuPasajero.main(pasajero);
         } else {
-            System.out.println("\nError al logearse");
+            Consola.gotoxy(27, 15);
+            System.out.print("No se ha podido iniciar sesión");
+            Consola.gotoxy(27, 16);
+            System.out.print("Presione ENTER para continuar");
+            sc.nextLine();
         }
     }
 }

@@ -17,20 +17,44 @@ public class MenuAdmin {
         boolean stay = true;
         while (stay){
 
-            System.out.println("-------------- MENU ADMIN --------------");
-            System.out.println("Que desea hacer...");
-            System.out.println("1. Agregar un conductor");
-            System.out.println("2. Eliminar conductor");
-            System.out.println("3. Editar conductor");
-            System.out.println("4. Agregar ruta");
-            System.out.println("5. Editar ruta");
-            System.out.println("6. Eliminar ruta");
-            System.out.println("7. Mostrar rutas");
-            System.out.println("8. Editar configuraciones");
-            System.out.println("9. Volver");
+            Consola.cls();
+            Consola.dibujar_rectangulo(42, 13, 20, 5);
+            Consola.gotoxy(36, 5);
+            System.out.print(" MENU ADMIN ");
+            Consola.gotoxy(22, 7);
+            System.out.print("1. Agregar un Conductor");
+            Consola.gotoxy(22, 8);
+            System.out.print("2. Eliminar Conductor");
+            Consola.gotoxy(22, 9);
+            System.out.print("3. Editar Conductor");
+            Consola.gotoxy(22, 10);
+            System.out.print("4. Agregar Ruta");
+            Consola.gotoxy(22, 11);
+            System.out.print("5. Editar Ruta");
+            Consola.gotoxy(22, 12);
+            System.out.print("6. Eliminar Ruta");
+            Consola.gotoxy(22, 13);
+            System.out.print("7. Mostrar Rutas");
+            Consola.gotoxy(22, 14);
+            System.out.print("8. Editar Configuraciones");
+            Consola.gotoxy(22, 15);
+            System.out.print("9. Volver");
 
-            int aux = sc.nextInt();
+            Consola.gotoxy(22, 17);
+            System.out.println("Ingrese su opcion: ");
+
+            Consola.gotoxy(41, 17);
+
+            int aux = 0;
+
+            try{
+                aux = sc.nextInt();
+            } catch (Exception e){
+                Consola.gotoxy(30, 20);
+                System.out.print("Escoja una opcion valida...");
+            }
             sc.nextLine();
+
             switch (aux){
                 case 1:
                     ma.agregar_conductor();
@@ -60,72 +84,162 @@ public class MenuAdmin {
                     stay = false;
                     break;
                 default:
-                    System.out.println("Escoja una opcion valida...");
+                    Consola.gotoxy(30, 20);
+                    System.out.print("Escoja una opcion valida...");
+                    Consola.gotoxy(27, 21);
+                    System.out.print("Presione ENTER para continuar...");
+                    sc.nextLine();
             }
         }
     }
 
     public void agregar_conductor(){
         HashMap<String, String> datos = new HashMap<>();
-        System.out.println("\n------------ AGREGAR UN CONDUCTOR ------------");
-        System.out.println("Ingrese los nombres: ");
-        datos.put("nombres", sc.nextLine());
-        System.out.println("Ingrese los apellidos: ");
-        datos.put("apellidos", sc.nextLine());
-        System.out.println("Ingrese el telefono: ");
-        datos.put("telefono", sc.nextLine());
-        System.out.println("Ingrese el dni: ");
+
+        Consola.cls();
+        Consola.dibujar_rectangulo(42, 9, 20, 5);
+        Consola.gotoxy(31, 5);
+        System.out.print(" AGREGAR UN CONDUCTOR ");
+        Consola.gotoxy(22, 7);
+        System.out.print("DNI: ");
+        Consola.gotoxy(22, 8);
+        System.out.print("Nombres: ");
+        Consola.gotoxy(22, 9);
+        System.out.print("Apellidos: ");
+        Consola.gotoxy(22, 10);
+        System.out.print("Telefono: ");
+        Consola.gotoxy(22, 11);
+        System.out.print("Fecha de Nacimiento: ");
+        Consola.gotoxy(22, 12);
+        System.out.print("Distrito: ");
+        Consola.gotoxy(22, 13);
+        System.out.print("Contrasena: ");
+
+        Consola.gotoxy(27, 7);
         datos.put("dni", sc.nextLine());
 
         Conductor conductor = Conductor.conductor_por_dni(datos.get("dni"));
         if(conductor!=null){
-            System.out.println("Este dni ya esta registrado");
+            Consola.gotoxy(19, 17);
+            System.out.print("Ya existe un conductor registrado con este DNI");
+            Consola.gotoxy(26, 18);
+            System.out.print("Presione ENTER para continuar");
+            sc.nextLine();
             return;
         }
 
-        System.out.println("Ingrese la fecha de nacimiento: ");
+        Consola.gotoxy(31, 8);
+        datos.put("nombres", sc.nextLine());
+        Consola.gotoxy(33, 9);
+        datos.put("apellidos", sc.nextLine());
+        Consola.gotoxy(32, 10);
+        datos.put("telefono", sc.nextLine());
+        Consola.gotoxy(43, 11);
         datos.put("fecha_nacimiento", sc.nextLine());
-        System.out.println("Ingrese el distrito de residencia: ");
+        Consola.gotoxy(32, 12);
         datos.put("distrito", sc.nextLine());
-        System.out.println("Ingrese la contrasena");
+        Consola.gotoxy(35, 13);
         datos.put("contrasena", sc.nextLine());
 
         boolean exito = Conductor.registrar_conductor(datos);
+
+        Consola.gotoxy(20, 17);
         if(exito){
-            System.out.println("SE REGISTRO CORRECTAMENTE AL CONDUCTOR");
+            System.out.print("Se ha registrado el conductor con exito");
         } else {
-            System.out.println("OCURRIO UN ERROR");
+            System.out.println("No se ha podido registrar al usuario");
         }
+        Consola.gotoxy(26, 18);
+        System.out.print("Presione ENTER para continuar");
+        sc.nextLine();
     }
 
     public void editar_conductor(){
-        System.out.println("\n---------- EDITAR CONDUCTOR -----------");
-        System.out.println("Ingrese el dni del conductor: ");
+
+        Consola.cls();
+        Consola.dibujar_rectangulo(40, 3, 25, 5);
+        Consola.gotoxy(37, 5);
+        System.out.print(" EDITAR CONDUCTOR ");
+        Consola.gotoxy(27, 7);
+        System.out.print("DNI: ");
+        Consola.gotoxy(32, 7);
         String dni = sc.nextLine();
 
         Conductor conductor_existente = Conductor.conductor_por_dni(dni);
 
         if(conductor_existente == null){
-            System.out.println("No hay conductor con este DNI");
+            Consola.gotoxy(31, 11);
+            System.out.print("No hay conductor con este DNI");
+            Consola.gotoxy(31, 12);
+            System.out.print("Presione ENTER para continuar");
+            sc.nextLine();
             return;
         }
 
+
         HashMap<String, String> datos = new HashMap<>();
 
-        System.out.println("\n------ Informacion actual ------");
-        conductor_existente.mostrar_perfil();
-        System.out.println("\n------ Modificaciones --------");
-        System.out.println("Si no desea modificar algun campo solo presione ENTER");
+        Consola.dibujar_rectangulo(40, 9, 14, 11);
+        Consola.gotoxy(25, 11);
+        System.out.print(" INFORMACION ACTUAL ");
+        Consola.gotoxy(16, 13);
+        System.out.print("DNI: " + conductor_existente.get_dni());
+        Consola.gotoxy(16, 14);
+        System.out.print("Nombres: " + conductor_existente.get_nombres());
+        Consola.gotoxy(16, 15);
+        System.out.print("Apellidos: " + conductor_existente.get_apellidos());
+        Consola.gotoxy(16, 16);
+        System.out.print("Telefono: " + conductor_existente.get_telefono());
+        Consola.gotoxy(16, 17);
+        System.out.println("Fecha de Nacimiento: " + conductor_existente.get_fecha_nacimiento());
+        Consola.gotoxy(16, 18);
+        System.out.print("Distrito: " + conductor_existente.get_distrito());
+        Consola.gotoxy(16, 19);
+        System.out.print("Dias de descanso: ");
+        for(String dia: conductor_existente.get_dias_descanso()){
+            System.out.print(dia + ", ");
+        }
+
+        Consola.dibujar_rectangulo(50, 8, 62, 11);
+        Consola.gotoxy(80, 11);
+        System.out.print(" MODIFICACIONES ");
+        Consola.gotoxy(64, 13);
+        System.out.print("Si no desea modificar algun campo presione ENTER");
+
+        Consola.gotoxy(64, 15);
         System.out.print("Nuevos nombres: ");
-        datos.put("nombres", sc.nextLine());
+        Consola.gotoxy(64, 16);
         System.out.print("Nuevos Apellidos: ");
-        datos.put("apellidos", sc.nextLine());
+        Consola.gotoxy(64, 17);
         System.out.print("Nuevo telefono: ");
-        datos.put("telefono", sc.nextLine());
+        Consola.gotoxy(64, 18);
         System.out.print("Nuevo distrito: ");
+
+        Consola.gotoxy(80, 15);
+        datos.put("nombres", sc.nextLine());
+        Consola.gotoxy(82, 16);
+        datos.put("apellidos", sc.nextLine());
+        Consola.gotoxy(80, 17);
+        datos.put("telefono", sc.nextLine());
+        Consola.gotoxy(80, 18);
         datos.put("distrito", sc.nextLine());
 
         boolean exito = conductor_existente.editar_perfil(datos);
+
+        if(!exito){
+            Consola.gotoxy(45, 23);
+            System.out.print("No se ha podido modificar el perfil");
+            Consola.gotoxy(42, 24);
+            System.out.print("Presione ENTER para continuar");
+            sc.nextLine();
+            return;
+        }
+
+        Consola.gotoxy(42, 23);
+        System.out.print("Perfil modificado exitosamente");
+        Consola.gotoxy(42, 24);
+        System.out.print("Presione ENTER para continuar");
+        sc.nextLine();
     }
 
     public void eliminar_conductor(){
