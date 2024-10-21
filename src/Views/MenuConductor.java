@@ -21,14 +21,24 @@ public class MenuConductor {
 
         boolean stay = true;
         while(stay){
-
+            Consola.cls();
+            Consola.dibujar_rectangulo(42, 7, 33, 7);
+            Consola.gotoxy(35, 5);
             System.out.println("------------ MENU DE CONDUCTOR ------------");
+            Consola.gotoxy(35, 8);
             System.out.println("Elija la opcion que desea: ");
+            Consola.gotoxy(35, 10);
             System.out.println("1. Ver mi perfil");
+            Consola.gotoxy(35, 11);
             System.out.println("2. Editar mi perfil");
+            Consola.gotoxy(35, 12);
             System.out.println("3. Editar mis dias de descanso");
+            Consola.gotoxy(35, 13);
             System.out.println("4. Ver viaje asignado");
+            Consola.gotoxy(35, 14);
             System.out.println("5. Volver");
+            Consola.gotoxy(35, 16);
+            System.out.print("Ingrese su opcion: ");
             int aux = sc.nextInt();
             sc.nextLine();
             switch (aux){
@@ -48,6 +58,7 @@ public class MenuConductor {
                     stay = false;
                     break;
                 default:
+                    Consola.gotoxy(35, 18);
                     System.out.println("Escoja una opcion valida...");
             }
         }
@@ -133,69 +144,119 @@ public class MenuConductor {
     }
 
     public void ver_perfil(Conductor conductor){
+        Consola.cls();
+        Consola.dibujar_rectangulo(42, 9, 33, 5);
+        Consola.gotoxy(35, 5);
+        System.out.println("------------ MI PERFIL ------------");
         conductor.mostrar_perfil();
+        Consola.gotoxy(35, 15);
+        System.out.print("Presione ENTER para continuar...");
+        sc.nextLine();
     }
 
     public void editar_perfil(Conductor conductor){
         HashMap<String, String> datos = new HashMap<>();
-        System.out.println("\n----------- MODIFICAR PERFIL -----------");
-        System.out.println("Si no quiere modificar algun apartado solo dejelo en blando y de ENTER");
-        System.out.println("Nuevos Nombres: ");
+        Consola.cls();
+        Consola.dibujar_rectangulo(72, 12, 33, 7);
+        Consola.gotoxy(35, 5);
+        System.out.println("----------------------- MODIFICAR PERFIL -----------------------");
+        Consola.gotoxy(35, 7);
+        System.out.println("Si no quiere modificar algun apartado solo dejelo en blanco y de ENTER");
+        Consola.gotoxy(35, 9);
+        System.out.print("Nuevos Nombres: ");
         datos.put("nombres", sc.nextLine());
-        System.out.println("Nuevos Apellidos: ");
+        Consola.gotoxy(35, 11);
+        System.out.print("Nuevos Apellidos: ");
         datos.put("apellidos", sc.nextLine());
-        System.out.println("Nuevo telefono: ");
+        Consola.gotoxy(35, 13);
+        System.out.print("Nuevo telefono: ");
         datos.put("telefono", sc.nextLine());
-        System.out.println("Nuevo distrito: ");
+        Consola.gotoxy(35, 15);
+        System.out.print("Nuevo distrito: ");
         datos.put("distrito", sc.nextLine());
 
         boolean exito = conductor.editar_perfil(datos);
         if(exito){
+            Consola.gotoxy(35, 17);
             System.out.println("Cambios hechos correctamente...");
         } else{
+            Consola.gotoxy(35, 17);
             System.out.println("OCURRIO UN ERROR");
         }
+        Consola.gotoxy(35, 19);
+        System.out.print("Presione ENTER para continuar...");
+        sc.nextLine();
     }
 
     public void editar_dias_descanso(Conductor conductor){
-        System.out.println("\n---------- EDITAR DIAS DE DESCANSO -----------");
+        Consola.cls();
+        Consola.dibujar_rectangulo(62, 8, 33, 7);
+        Consola.gotoxy(35, 5);
+        System.out.println("---------------- EDITAR DIAS DE DESCANSO ------------------");
+        Consola.gotoxy(35, 7);
         System.out.println("ADVERTENCIA:");
+        Consola.gotoxy(35, 8);
         System.out.println("Asegurese de ingresar los dias de la semana en minusculas");
+        Consola.gotoxy(35, 9);
         System.out.println("ademas, evite usar tildes. Ej: lunes, martes, miercoles...");
 
         int limite_dias_descanso = Conductor.get_limite_dias_descanso();
-        System.out.println("\nUsted puede ingresar "+limite_dias_descanso+" dias...");
+        Consola.gotoxy(35, 12);
+        System.out.println("Usted puede ingresar "+limite_dias_descanso+" dias...");
 
         if(limite_dias_descanso==0){
+            Consola.gotoxy(35, 13);
             System.out.println("No se puede editar los dias de descanso");
+            Consola.gotoxy(35, 15);
+            System.out.print("Presione ENTER para continuar...");
+            sc.nextLine();
             return;
         }
 
         List<String> dias = new ArrayList<>();
         for(int i = 0; i < limite_dias_descanso; i++){
-            System.out.println("Dia "+(i+1)+": ");
+            Consola.gotoxy(35, 13 + i);
+            System.out.print("Dia "+(i+1)+": ");
             dias.add(sc.nextLine());
         }
 
         boolean exito = conductor.editar_dias_descanso(dias);
         if(exito){
+            Consola.gotoxy(35, 18);
             System.out.println("SE EDITO CON EXITO LOS DIAS DE DESCANSO");
         } else {
+            Consola.gotoxy(35, 18);
             System.out.println("NO SE PUDO EDITAR LOS DIAS DE DESCANSO");
         }
+        Consola.gotoxy(35, 19);
+        System.out.print("Presione ENTER para continuar...");
+        sc.nextLine();
     }
 
     public void ver_viaje_asignado(Conductor conductor){
-        System.out.println("\n----------- VER VIAJE ASIGNADO -----------");
+        Consola.cls();
+        Consola.dibujar_rectangulo(42, 8, 33, 7);
+        Consola.gotoxy(35, 5);
+        System.out.println("----------- VER VIAJE ASIGNADO -----------");
         if(conductor.get_viaje_actual() == null){
+            Consola.gotoxy(35, 7);
             System.out.println("No hay viaje asignado...");
         } else {
             Viaje viaje_actual = conductor.get_viaje_actual();
+            Consola.gotoxy(35, 8);
             System.out.println("ID: "+viaje_actual.get_id());
+            Consola.gotoxy(35, 9);
             System.out.println("Origen: "+viaje_actual.get_ruta().get_origen());
+            Consola.gotoxy(35, 10);
             System.out.println("Destino: "+viaje_actual.get_ruta().get_destino());
+            Consola.gotoxy(35, 11);
             System.out.println("Fecha de viaje: "+viaje_actual.get_fecha());
+            Consola.gotoxy(35, 12);
             System.out.println("Pasajeros: "+viaje_actual.get_pasajeros());
         }
+        Consola.gotoxy(35, 14);
+        System.out.print("Presione ENTER para continuar...");
+        sc.nextLine();
     }
 }
+
