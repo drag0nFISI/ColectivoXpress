@@ -19,5 +19,15 @@
     "fecha_nacimiento": "",
     "contrasena": "",
     "numero_viajes": 0
+  },
+  {
+    "nombres": "Alonso",
+    "apellidos": "Luque",
+    "telefono": "luquealonso151@gmail.com",
+    "dni": "74982105",
+    "distrito": "S.M.P",
+    "fecha_nacimiento": "25/01/2005",
+    "contrasena": "123456",
+    "numero_viajes": 0
   }
 ]

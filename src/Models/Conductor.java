@@ -2,6 +2,7 @@ package Models;
 
 import Repository.AdminRepository;
 import Repository.ConductorRepository;
+import Views.Consola;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -144,15 +145,21 @@ public class Conductor {
     }
 
     public void mostrar_perfil(){
-        System.out.println("Nombre: "+ this.nombres);
-        System.out.println("Apellidos: "+ this.apellidos);
-        System.out.println("Telefono: "+ this.telefono);
-        System.out.println("DNI: "+ this.dni);
-        System.out.println("Fecha de Nacimiento: "+ this.fecha_nacimiento);
-        System.out.println("Distrito: "+ this.distrito);
-        System.out.println("Dias de descanso: "+ this.dias_descanso);
+        Consola.gotoxy(35, 7);
+        System.out.println("Nombre: " + this.nombres);
+        Consola.gotoxy(35, 8);
+        System.out.println("Apellidos: " + this.apellidos);
+        Consola.gotoxy(35, 9);
+        System.out.println("Telefono: " + this.telefono);
+        Consola.gotoxy(35, 10);
+        System.out.println("DNI: " + this.dni);
+        Consola.gotoxy(35, 11);
+        System.out.println("Fecha de Nacimiento: " + this.fecha_nacimiento);
+        Consola.gotoxy(35, 12);
+        System.out.println("Distrito: " + this.distrito);
+        Consola.gotoxy(35, 13);
+        System.out.println("Dias de descanso: " + this.dias_descanso);
     }
-
     public boolean editar_perfil(HashMap<String, String> datos){
         String nombres = datos.get("nombres");
         if(!nombres.equals("")){
