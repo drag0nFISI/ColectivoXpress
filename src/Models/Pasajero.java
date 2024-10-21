@@ -149,7 +149,7 @@ public class Pasajero {
     public void mostrar_perfil(){
         System.out.println("Nombre: "+ this.nombres);
         System.out.println("Apellidos: "+ this.apellidos);
-        System.out.println("Telefono: "+ this.telefono);
+        System.out.println("Correo : "+ this.telefono);
         System.out.println("DNI: "+ this.dni);
         System.out.println("Fecha de Nacimiento: "+ this.fecha_nacimiento);
         System.out.println("Distrito: "+ this.distrito);

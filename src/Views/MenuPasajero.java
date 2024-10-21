@@ -19,16 +19,30 @@ public class MenuPasajero {
         MenuPasajero menuPasajero = new MenuPasajero();
 
         while (true) {
+            Consola.cls();
+            Consola.dibujar_rectangulo(42, 7, 33, 10);
+            Consola.gotoxy(35, 5);
             System.out.println("------------ MENU DE PASAJERO ------------");
+            Consola.gotoxy(35, 8);
             System.out.println("Elija la opcion que desea: ");
-            System.out.println("\t1. Ver mi perfil");
-            System.out.println("\t2. Editar mi perfil");
-            System.out.println("\t3. Buscar rutas");
-            System.out.println("\t4. Ver todas las rutas disponibles");
-            System.out.println("\t5. Ver viajes disponibles");
-            System.out.println("\t6. Comprar boleto");
-            System.out.println("\t7. Ver detalles de mi viaje actual");
-            System.out.println("\t8. Salir");
+            Consola.gotoxy(35, 10);
+            System.out.println("1. Ver mi perfil");
+            Consola.gotoxy(35, 11);
+            System.out.println("2. Editar mi perfil");
+            Consola.gotoxy(35, 12);
+            System.out.println("3. Buscar rutas");
+            Consola.gotoxy(35, 13);
+            System.out.println("4. Ver todas las rutas disponibles");
+            Consola.gotoxy(35, 14);
+            System.out.println("5. Ver viajes disponibles");
+            Consola.gotoxy(35, 15);
+            System.out.println("6. Comprar boleto");
+            Consola.gotoxy(35, 16);
+            System.out.println("7. Ver detalles de mi viaje actual");
+            Consola.gotoxy(35, 17);
+            System.out.println("8. Salir");
+            Consola.gotoxy(35, 19);
+            System.out.print("Ingrese su opcion: ");
             int aux = scanner.nextInt();
             scanner.nextLine();
             switch (aux) {
@@ -54,99 +68,168 @@ public class MenuPasajero {
                     menuPasajero.ver_viaje_actual(pasajero);
                     break;
                 case 8:
+                    Consola.cls();
+                    Consola.dibujar_rectangulo(30, 8, 40, 5);
+                    Consola.gotoxy(35, 10);
                     System.out.println("Saliendo del menú de pasajero...");
                     return;
                 default:
+                    Consola.gotoxy(35, 12);
                     System.out.println("Escoja una opcion valida...");
             }
         }
     }
 
     public void ver_perfil(Pasajero pasajero) {
-        pasajero.mostrar_perfil();
+        Consola.cls();
+        Consola.dibujar_rectangulo(40, 10, 29, 5);
+        Consola.gotoxy(35, 5);
+        System.out.println("------------ MI PERFIL ------------");
+        Consola.gotoxy(34, 7);
+        System.out.printf("Nombre: %s\n", pasajero.get_nombres());
+        Consola.gotoxy(34, 8);
+        System.out.printf("Apellidos: %s\n", pasajero.get_apellidos());
+        Consola.gotoxy(34, 9);
+        System.out.printf("Correo: %s\n", pasajero.get_telefono());
+        Consola.gotoxy(34, 10);
+        System.out.printf("DNI: %s\n", pasajero.get_dni());
+        Consola.gotoxy(34, 11);
+        System.out.printf("Fecha de Nacimiento: %s\n", pasajero.get_fecha_nacimiento());
+        Consola.gotoxy(34, 12);
+        System.out.printf("Distrito: %s\n", pasajero.get_distrito());
+        Consola.gotoxy(34, 13);
+        System.out.printf("Numero de viajes: %d\n", pasajero.get_numero_viajes());
+        Consola.gotoxy(30, 15);
+        System.out.print("Presione ENTER para continuar...");
+        scanner.nextLine();
     }
 
-    public void ver_viajes_disponibles(){
+
+    public void ver_viajes_disponibles() {
+        Consola.cls();
+        Consola.gotoxy(35, 5);
         System.out.println("------------ VIAJES DISPONIBLES ------------");
         ViajeRepository vr = new ViajeRepository();
         List<Viaje> viajes = vr.obtener_viajes();
 
         ConductorRepository cr = new ConductorRepository();
 
-        if(viajes == null){
+        if (viajes == null) {
+            Consola.gotoxy(22, 7);
             System.out.println("No hay viajes disponibles...");
+            Consola.gotoxy(22, 9);
+            System.out.print("Presione ENTER para continuar...");
+            scanner.nextLine();
             return;
         }
+
         for (Viaje viaje : viajes) {
-            System.out.print("\n------------ Viaje "+viaje.get_ruta().get_origen());
-            System.out.println("-> "+viaje.get_ruta().get_destino()+" -------------");
-            System.out.println("ID del viaje: "+viaje.get_id());
-            System.out.println("Nombre del Conductor: "+cr.consultar_credenciales(viaje.get_dni_conductor(), "").get_nombres());
-            System.out.println("Fecha del viaje: "+viaje.get_fecha());
-            System.out.println("Precio: "+viaje.get_ruta().get_precio());
-            System.out.println("Precio oferta: "+viaje.get_ruta().get_precio_oferta());
+            int centerX = 44;
+            String origenDestino = "Viaje " + viaje.get_ruta().get_origen() + " -> " + viaje.get_ruta().get_destino();
+            int centeredPosition = centerX - (origenDestino.length() / 2);
+
+            Consola.gotoxy(centeredPosition, 7);
+            System.out.println("------------ " + origenDestino + " -----------");
+            Consola.gotoxy(35, 9);
+            System.out.println("ID del viaje: " + viaje.get_id());
+            Consola.gotoxy(35, 10);
+            System.out.println("Nombre del Conductor: " + cr.consultar_credenciales(viaje.get_dni_conductor(), "").get_nombres());
+            Consola.gotoxy(35, 11);
+            System.out.println("Fecha del viaje: " + viaje.get_fecha());
+            Consola.gotoxy(35, 12);
+            System.out.println("Precio: " + viaje.get_ruta().get_precio());
+            Consola.gotoxy(35, 13);
+            System.out.println("Precio oferta: " + viaje.get_ruta().get_precio_oferta());
         }
+        Consola.gotoxy(35, 15);
+        System.out.print("Presione ENTER para continuar...");
+        scanner.nextLine();
     }
 
-    public void comprar_boleto(Pasajero pasajero){
+    public void comprar_boleto(Pasajero pasajero) {
         ver_viajes_disponibles();
 
-        System.out.println("\n----------- COMPRAR BOLETO -----------");
-        System.out.println("Ingrese ID del viaje: ");
+        Consola.cls();
+        Consola.gotoxy(35, 5);
+        System.out.println("----------- COMPRAR BOLETO -----------");
+        Consola.gotoxy(35, 7);
+        System.out.print("Ingrese ID del viaje: ");
         String id_viaje = scanner.nextLine();
 
         ViajeRepository vr = new ViajeRepository();
         Viaje viaje = vr.obtener_viaje(id_viaje);
 
-
         if (viaje == null) {
+            Consola.gotoxy(35, 9);
             System.out.println("Viaje no encontrado. Intente nuevamente.");
+            Consola.gotoxy(35, 11);
+            System.out.print("Presione ENTER para continuar...");
+            scanner.nextLine();
             return;
         }
 
-
-
         if (pasajero == null) {
+            Consola.gotoxy(35, 9);
             System.out.println("Error: Pasajero nulo.");
+            Consola.gotoxy(35, 11);
+            System.out.print("Presione ENTER para continuar...");
+            scanner.nextLine();
             return;
         }
         if (viaje.get_ruta() == null) {
+            Consola.gotoxy(35, 9);
             System.out.println("Error: La ruta del viaje es nula.");
+            Consola.gotoxy(35, 11);
+            System.out.print("Presione ENTER para continuar...");
+            scanner.nextLine();
             return;
         }
 
+        Consola.gotoxy(35, 9);
         System.out.println("La ruta elegida es: " + viaje.get_ruta().get_origen() + " -> " + viaje.get_ruta().get_destino());
+        Consola.gotoxy(35, 11);
         System.out.println("A continuación se procederá con el pago...");
         Boleto boleto_creado = pasajero.generar_boleto(viaje);
-        if(boleto_creado == null){
+        if (boleto_creado == null) {
+            Consola.gotoxy(35, 13);
             System.out.println("No es posible comprar un boleto para este viaje actualmente");
+            Consola.gotoxy(35, 15);
+            System.out.print("Presione ENTER para continuar...");
+            scanner.nextLine();
             return;
         }
 
         try {
             PagoMP.init();
-            String descripcion = "Viaje "+viaje.get_ruta().get_origen()+" -> "+viaje.get_ruta().get_destino();
+            String descripcion = "Viaje " + viaje.get_ruta().get_origen() + " -> " + viaje.get_ruta().get_destino();
             float precio = viaje.get_ruta().get_precio();
             String correo = pasajero.get_telefono();
             Preference preference = PagoMP.crearPreferencia(boleto_creado.get_id(), descripcion, precio, correo);
 
-            System.out.println("Se le enviara a una página a completar el pago...");
-            System.out.println("Una vez culmine el pago, debera regresar y presionar ENTER para confirmarlo");
+            Consola.gotoxy(35, 17);
+            System.out.println("Se le enviará a una página a completar el pago...");
+            Consola.gotoxy(35, 19);
+            System.out.println("Una vez culmine el pago, deberá regresar y presionar ENTER para confirmarlo");
             Thread.sleep(1000);
 
             PagoMP.redirigirAWeb(preference);
             boolean pago_exitoso = false;
-            while(!pago_exitoso){
+            while (!pago_exitoso) {
+                Consola.gotoxy(35, 21);
                 System.out.println("En caso de querer cancelar la compra, escriba SALIR");
+                Consola.gotoxy(35, 23);
                 System.out.println("PRESIONE ENTER PARA VERIFICAR EL PAGO...");
                 String aux = scanner.nextLine();
-                if(aux.equals("SALIR")){
+                if (aux.equals("SALIR")) {
+                    Consola.gotoxy(35, 25);
                     System.out.println("Compra cancelada...");
                     return;
                 }
                 pago_exitoso = PagoMP.verificarEstadoPago(preference.getExternalReference());
-                if(pago_exitoso){
+                if (pago_exitoso) {
+                    Consola.gotoxy(35, 25);
                     System.out.println("Transacción exitosa");
+                    Consola.gotoxy(35, 27);
                     System.out.println("Espere un momento...");
                 }
             }
@@ -157,58 +240,100 @@ public class MenuPasajero {
         }
 
         if (pasajero.guardar_boleto(boleto_creado, viaje)) {
+            Consola.gotoxy(35, 29);
             System.out.println("Boleto comprado exitosamente.");
         } else {
+            Consola.gotoxy(35, 29);
             System.out.println("Error al comprar el boleto.");
         }
+        Consola.gotoxy(35, 31);
+        System.out.print("Presione ENTER para continuar...");
+        scanner.nextLine();
     }
 
-    public void ver_viaje_actual(Pasajero pasajero){
-        System.out.println("\n----------- VIAJE ACTUAL -----------");
+    public void ver_viaje_actual(Pasajero pasajero) {
+        Consola.cls();
+        Consola.dibujar_rectangulo(20, 3, 60, 25);
+        Consola.gotoxy(35, 5);
+        System.out.println("----------- VIAJE ACTUAL -----------");
         ViajeRepository vr = new ViajeRepository();
         Viaje viaje = vr.obtener_viaje(pasajero.id_viaje_actual);
-        if(viaje== null){
-            System.out.println("No ha comprado boleto para ningun viaje...");
+        if (viaje == null) {
+            Consola.gotoxy(22, 7);
+            System.out.println("No ha comprado boleto para ningún viaje...");
+            Consola.gotoxy(22, 9);
+            System.out.print("Presione ENTER para continuar...");
+            scanner.nextLine();
             return;
         }
 
         ConductorRepository cr = new ConductorRepository();
 
-        System.out.print("\n------------ Viaje "+viaje.get_ruta().get_origen());
-        System.out.println("-> "+viaje.get_ruta().get_destino()+" -------------");
-        System.out.println("ID del viaje: "+viaje.get_id());
-        System.out.println("Nombre del Conductor: "+cr.consultar_credenciales(viaje.get_dni_conductor(), "").get_nombres());
-        System.out.println("Fecha del viaje: "+viaje.get_fecha());
-        System.out.println("Precio: "+viaje.get_ruta().get_precio());
-        System.out.println("Precio oferta: "+viaje.get_ruta().get_precio_oferta());
+        System.out.print("\n------------ Viaje " + viaje.get_ruta().get_origen());
+        System.out.println("-> " + viaje.get_ruta().get_destino() + " -------------");
+        System.out.println("ID del viaje: " + viaje.get_id());
+        System.out.println("Nombre del Conductor: " + cr.consultar_credenciales(viaje.get_dni_conductor(), "").get_nombres());
+        System.out.println("Fecha del viaje: " + viaje.get_fecha());
+        System.out.println("Precio: " + viaje.get_ruta().get_precio());
+        System.out.println("Precio oferta: " + viaje.get_ruta().get_precio_oferta());
+        Consola.gotoxy(22, 25);
+        System.out.print("Presione ENTER para continuar...");
+        scanner.nextLine();
     }
 
     public void editar_perfil(Pasajero pasajero) {
         HashMap<String, String> datos = new HashMap<>();
-        System.out.println("\n----------- MODIFICAR PERFIL -----------");
+        Consola.cls();
+        Consola.gotoxy(35, 5);
+        System.out.println("----------- MODIFICAR PERFIL -----------");
+        Consola.gotoxy(22, 7);
         System.out.println("Si no quiere modificar algun apartado solo dejelo en blanco y de ENTER");
-        System.out.println("Nuevos Nombres: ");
+        Consola.gotoxy(22, 9);
+        System.out.print("Nuevos Nombres: ");
         datos.put("nombres", scanner.nextLine());
-        System.out.println("Nuevos Apellidos: ");
+        Consola.gotoxy(22, 11);
+        System.out.print("Nuevos Apellidos: ");
         datos.put("apellidos", scanner.nextLine());
-        System.out.println("Nuevo Correo: ");
+        Consola.gotoxy(22, 13);
+        System.out.print("Nuevo Correo: ");
         datos.put("telefono", scanner.nextLine());
-        System.out.println("Nuevo distrito: ");
+        Consola.gotoxy(22, 15);
+        System.out.print("Nuevo distrito: ");
         datos.put("distrito", scanner.nextLine());
 
         boolean exito = pasajero.editar_perfil(datos);
         if (exito) {
+            Consola.gotoxy(22, 17);
             System.out.println("Cambios hechos satisfactoriamente...");
         } else {
+            Consola.gotoxy(22, 17);
             System.out.println("OCURRIO UN ERROR");
         }
+        Consola.gotoxy(22, 19);
+        System.out.print("Presione ENTER para continuar...");
+        scanner.nextLine();
     }
 
     private static void buscarRutas() {
+        Consola.cls();
+        Consola.gotoxy(35, 5);
+        System.out.println("----------- BUSCAR RUTAS -----------");
+        Consola.gotoxy(22, 7);
         System.out.print("Ingrese el origen: ");
         String origin = scanner.nextLine();
+        Consola.gotoxy(22, 9);
         System.out.print("Ingrese el destino: ");
         String destination = scanner.nextLine();
         Ruta ruta = Ruta.buscar_ruta(origin, destination);
+        if (ruta != null) {
+            Consola.gotoxy(22, 11);
+            System.out.println("Ruta encontrada: " + ruta.get_origen() + " -> " + ruta.get_destino());
+        } else {
+            Consola.gotoxy(22, 11);
+            System.out.println("Ruta no encontrada.");
+        }
+        Consola.gotoxy(22, 13);
+        System.out.print("Presione ENTER para continuar...");
+        scanner.nextLine();
     }
 }
