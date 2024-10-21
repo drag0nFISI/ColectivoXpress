@@ -2,13 +2,11 @@ package Views;
 import Models.*;
 import Repository.ConductorRepository;
 import Repository.ViajeRepository;
-import Repository.BoletoRepository;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.Preference;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 // Vista para interactuar con el usuario

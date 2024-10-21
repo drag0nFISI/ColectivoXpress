@@ -1,7 +1,43 @@
-Color Palette
-Aquí tienes una pequeña referencia de colores de 256:
+1. Colores básicos (0-7):
 
-Colores básicos (0-7): Colores estándar (negro, rojo, verde, amarillo, azul, magenta, cyan, blanco).
-Colores brillantes (8-15): Colores brillantes correspondientes a los colores básicos.
-Colores en gradiente (16-231): Colores en una gama de colores más amplia (un total de 216 colores).
-Colores en escala de grises (232-255): 24 colores en escala de grises.
+0: Negro (RGB: 0,0,0)
+1: Rojo (RGB: 128,0,0)
+2: Verde (RGB: 0,128,0)
+3: Amarillo (RGB: 128,128,0)
+4: Azul (RGB: 0,0,128)
+5: Magenta (RGB: 128,0,128)
+6: Cyan (RGB: 0,128,128)
+7: Blanco (RGB: 192,192,192)
+
+-----------------------------------------------------------------------------
+
+2. Colores brillantes (8-15):
+
+8: Gris oscuro (RGB: 128,128,128)
+9: Rojo brillante (RGB: 255,0,0)
+10: Verde brillante (RGB: 0,255,0)
+11: Amarillo brillante (RGB: 255,255,0)
+12: Azul brillante (RGB: 0,0,255)
+13: Magenta brillante (RGB: 255,0,255)
+14: Cyan brillante (RGB: 0,255,255)
+15: Blanco brillante (RGB: 255,255,255)
+
+--------------------------------------------------------------------------------------
+
+3. Colores en gradiente (16-231):
+
+16: Gris oscuro (RGB: 0,0,0)
+17-52: Variaciones en tonos oscuros, como verdes oliva y azules marinos.
+53-88: Tonos medios, donde los colores empiezan a saturarse más.
+89-124: Tonos brillantes y vibrantes (parecidos a los colores del arcoíris).
+125-160: Tonos más claros, colores pastel y colores con menos saturación.
+161-196: Colores intensos, combinaciones de rojos, verdes y azules brillantes.
+197-231: Tonos cercanos al blanco, incluyendo algunos colores desaturados.
+
+-------------------------------------------------------------------------------------------
+
+4. Colores en escala de grises (232-255):
+
+232: Gris oscuro (RGB: 8,8,8)
+233-244: Incrementos graduales en la luminosidad del gris.
+245-255: Grises muy claros, con 255 siendo prácticamente blanco (RGB: 238,238,238).
