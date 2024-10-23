@@ -28,15 +28,15 @@ public class MenuPasajero {
             Consola.gotoxy(35, 11);
             System.out.println("2. Editar mi perfil");
             Consola.gotoxy(35, 12);
-            System.out.println("3. Buscar rutas");
+            System.out.println("3. Buscar Viajes");
             Consola.gotoxy(35, 13);
-            System.out.println("4. Ver todas las rutas disponibles");
+            System.out.println("4. Ver todas las rutas");
             Consola.gotoxy(35, 14);
-            System.out.println("5. Ver viajes disponibles");
+            System.out.println("5. Ver todos los viajes disponibles");
             Consola.gotoxy(35, 15);
             System.out.println("6. Comprar boleto");
             Consola.gotoxy(35, 16);
-            System.out.println("7. Ver detalles de mi viaje actual");
+            System.out.println("7. Ver detalles de mi ultimo boleto");
             Consola.gotoxy(35, 17);
             System.out.println("8. Salir");
             Consola.gotoxy(35, 19);
@@ -51,7 +51,8 @@ public class MenuPasajero {
                     menuPasajero.editar_perfil(pasajero);
                     break;
                 case 3:
-                    buscarRutas();
+                    //buscarRutas();
+                    menuPasajero.buscar_viajes();
                     break;
                 case 4:
                     Ruta.mostrar_rutas();
@@ -333,5 +334,66 @@ public class MenuPasajero {
         Consola.gotoxy(22, 13);
         System.out.print("Presione ENTER para continuar...");
         scanner.nextLine();
+    }
+
+    public void buscar_viajes(){
+        Consola.cls();
+        Consola.gotoxy(35, 5);
+        System.out.println("----------- BUSCAR VIAJES -----------");
+        Consola.gotoxy(15, 7);
+        System.out.print("INGRESE SOLO LOS FILTROS DESEADOS, SI NO DESEA FILTRAR ORIGEN DEJELO VACIO, IGUAL CON DESTINO");
+        Consola.gotoxy(22, 10);
+        System.out.print("Origen: ");
+        Consola.gotoxy(22, 11);
+        System.out.print("Destino: ");
+
+
+        Consola.gotoxy(30, 10);
+        String origen = scanner.nextLine();
+        Consola.gotoxy(31, 11);
+        String destino = scanner.nextLine();
+
+        List<Viaje> viajes = Viaje.buscar_viajes(origen, destino);
+
+        int aux = 1;
+
+        Consola.cls();
+
+        for(Viaje viaje:viajes){
+            Consola.dibujar_boton(7, 1, 5, 4+(2*aux), viaje.get_id());
+            Consola.dibujar_boton(20, 1, 13, 4+(2*aux), viaje.get_ruta().get_origen());
+            Consola.dibujar_boton(20, 1, 34, 4+(2*aux), viaje.get_ruta().get_destino());
+            Consola.dibujar_boton(8, 1, 55, 4+(2*aux), Float.toString(viaje.get_ruta().get_precio()));
+            String precio_oferta = "";
+            if(viaje.get_ruta().get_precio_oferta()==0){
+                precio_oferta = Float.toString(viaje.get_ruta().get_precio_oferta());
+            }
+            Consola.dibujar_boton(13, 1, 64, 4+(2*aux), precio_oferta);
+            Consola.dibujar_boton(14, 1, 78, 4+(2*aux), viaje.get_dni_conductor());
+
+            int asientos_restantes;
+            if(viaje.get_pasajeros()!=null){
+               asientos_restantes = viaje.get_capacidad_pasajeros() - viaje.get_pasajeros().size();
+            } else {
+                asientos_restantes = viaje.get_capacidad_pasajeros();
+            }
+
+            Consola.dibujar_boton(8, 1, 93, 4+(2*aux), Integer.toString(asientos_restantes));
+
+            aux += 1;
+        }
+        Consola.dibujar_boton(7, 1, 5, 4, "ID");
+        Consola.dibujar_boton(20, 1, 13, 4, "ORIGEN");
+        Consola.dibujar_boton(20, 1, 34, 4, "DESTINO");
+        Consola.dibujar_boton(8, 1, 55, 4, "PRECIO");
+        Consola.dibujar_boton(13, 1, 64, 4, "PRECIO OFERTA");
+        Consola.dibujar_boton(14, 1, 78, 4, "DNI CONDUCTOR");
+        Consola.dibujar_boton(8, 1, 93, 4, "ASIENTOS");
+
+
+        Consola.gotoxy(22, 13);
+        System.out.print("Presione ENTER para continuar...");
+        scanner.nextLine();
+
     }
 }

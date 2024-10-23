@@ -13,11 +13,13 @@ public class Viaje {
     public List<Pasajero> pasajeros;
     public String dni_conductor;
 
+    static ViajeRepository vr = new ViajeRepository();
+
     public Viaje(String id, String fecha, Ruta ruta, String dni_conductor) {
         this.id = id;
         this.fecha = fecha;
         this.ruta = ruta;
-
+        this.capacidad_pasajeros = 10;
         this.dni_conductor = dni_conductor;
         this.pasajeros = new ArrayList<>();
     }
@@ -69,21 +71,44 @@ public class Viaje {
             return false;
         }
         this.pasajeros.add(pasajero);
-        ViajeRepository vr = new ViajeRepository();
+
         return vr.editar_viaje(this);
     }
 
     public boolean delete_pasajero(Pasajero pasajero){
-        if(this.pasajeros.size() == 0){
+        if(this.pasajeros.isEmpty()){
             return false;
         }
         if(this.pasajeros.contains(pasajero)){
             return false;
         }
         this.pasajeros.remove(pasajero);
-        ViajeRepository vr = new ViajeRepository();
+
         return vr.editar_viaje(this);
     }
 
+    public static List<Viaje> buscar_viajes(String origen, String destino){
+        List<Viaje> viajes = new ArrayList<>();
+        List<Viaje> total_viajes = vr.obtener_viajes();
 
+        for(Viaje viaje:total_viajes){
+            int aux1 = 1;
+            int aux2 = 1;
+            if(!origen.isEmpty()){
+                if(!viaje.get_ruta().get_origen().equals(origen)){
+                    aux1 = 0;
+                }
+            }
+            if(!destino.isEmpty()){
+                if(!viaje.get_ruta().get_destino().equals(destino)){
+                    aux2 = 0;
+                }
+            }
+            if(aux1*aux2 == 1){
+                viajes.add(viaje);
+            }
+        }
+
+        return viajes;
+    }
 }

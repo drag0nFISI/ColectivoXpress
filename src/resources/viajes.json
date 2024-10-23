@@ -1,29 +1,44 @@
 [
   {
-    "id": "68327",
-    "fecha": "2024-10-18",
+    "id": "11213",
+    "fecha": "2024-10-22",
+    "ruta": {
+      "origen": "Lima",
+      "destino": "Ica",
+      "tiempo_aproximado": "6",
+      "precio": 1.5,
+      "precio_oferta": 0.0
+    },
+    "capacidad_pasajeros": 10,
+    "pasajeros": [],
+    "dni_conductor": "12345678"
+  },
+  {
+    "id": "69859",
+    "fecha": "2024-10-22",
+    "ruta": {
+      "origen": "Lima",
+      "destino": "Chancay",
+      "tiempo_aproximado": "10",
+      "precio": 1.5,
+      "precio_oferta": 0.0
+    },
+    "capacidad_pasajeros": 10,
+    "pasajeros": [],
+    "dni_conductor": "87654321"
+  },
+  {
+    "id": "94417",
+    "fecha": "2024-10-22",
     "ruta": {
       "origen": "Lima",
       "destino": "Tacna",
       "tiempo_aproximado": "10h",
-      "precio": 3.0,
+      "precio": 1.5,
       "precio_oferta": 0.0
     },
     "capacidad_pasajeros": 10,
-    "pasajeros": [
-      {
-        "nombres": "Mihael",
-        "apellidos": "Cristobal",
-        "telefono": "mihael.cristobal@unmsm.edu.pe",
-        "dni": "71632395",
-        "distrito": "Puente Piedra",
-        "fecha_nacimiento": "05/01/2006",
-        "contrasena": "1234",
-        "id_viaje_actual": "68327",
-        "numero_viajes": 0
-      }
-    ],
-    "dni_conductor": "12345678",
-    "precio": 0.0
+    "pasajeros": [],
+    "dni_conductor": "11111111"
   }
 ]

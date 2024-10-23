@@ -1,30 +1,30 @@
 [
   {
     "origen": "Lima",
-    "destino": "Trujillo",
-    "tiempo_aproximado": "5 horas",
-    "precio": 80.0,
-    "precio_oferta": 0.0
-  },
-  {
-    "origen": "Lima",
-    "destino": "Chancay",
-    "tiempo_aproximado": "11",
-    "precio": 120.0,
-    "precio_oferta": 0.0
-  },
-  {
-    "origen": "Lima",
     "destino": "Arequipa",
     "tiempo_aproximado": "12h",
-    "precio": 120.0,
+    "precio": 1.5,
     "precio_oferta": 0.0
   },
   {
     "origen": "Lima",
     "destino": "Tacna",
     "tiempo_aproximado": "10h",
-    "precio": 3.0,
+    "precio": 1.5,
+    "precio_oferta": 0.0
+  },
+  {
+    "origen": "Lima",
+    "destino": "Chancay",
+    "tiempo_aproximado": "10",
+    "precio": 1.5,
+    "precio_oferta": 0.0
+  },
+  {
+    "origen": "Lima",
+    "destino": "Ica",
+    "tiempo_aproximado": "6",
+    "precio": 1.5,
     "precio_oferta": 0.0
   }
 ]

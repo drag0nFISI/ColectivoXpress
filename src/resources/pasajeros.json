@@ -7,17 +7,6 @@
     "distrito": "Puente Piedra",
     "fecha_nacimiento": "05/01/2006",
     "contrasena": "1234",
-    "id_viaje_actual": "68327",
-    "numero_viajes": 0
-  },
-  {
-    "nombres": "",
-    "apellidos": "",
-    "telefono": "",
-    "dni": "",
-    "distrito": "",
-    "fecha_nacimiento": "",
-    "contrasena": "",
     "numero_viajes": 0
   },
   {
@@ -28,6 +17,16 @@
     "distrito": "S.M.P",
     "fecha_nacimiento": "25/01/2005",
     "contrasena": "123456",
+    "numero_viajes": 0
+  },
+  {
+    "nombres": "Martin",
+    "apellidos": "Perez",
+    "telefono": "miguelsoliscunza24@gmail.com",
+    "dni": "00000000",
+    "distrito": "Comas",
+    "fecha_nacimiento": "00/00/0000",
+    "contrasena": "1234",
     "numero_viajes": 0
   }
 ]

@@ -76,7 +76,7 @@ public class Ruta {
         Consola.dibujar_boton(20, 1, 47, 4, "Tiempo Aprox. Viaje");
         Consola.dibujar_boton(20, 1, 68, 4, "Precio Regular");
         Consola.dibujar_boton(20, 1, 89, 4, "Precio Oferta");
-        Consola.reset_color();
+        Consola.change_color(0, 7);
 
         Consola.gotoxy(80, 2);
         System.out.print("Presione ENTER para continuar...");

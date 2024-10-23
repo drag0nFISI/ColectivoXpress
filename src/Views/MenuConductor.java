@@ -3,6 +3,7 @@ package Views;
 import Models.Conductor;
 import Models.Ruta;
 import Models.Viaje;
+import Repository.ConductorRepository;
 import Repository.RutaRepository;
 import Repository.ViajeRepository;
 
@@ -65,13 +66,26 @@ public class MenuConductor {
     }
 
     public void comprobar_viaje_actual(Conductor conductor){
-        if(conductor.get_viaje_actual() == null){
+
+        boolean viaje_existente = false;
+        ViajeRepository vr = new ViajeRepository();
+        List<Viaje> viajes_aux = vr.obtener_viajes();
+        if(viajes_aux!=null){
+            for(Viaje viaje:viajes_aux){
+                if(viaje.get_dni_conductor().equals(conductor.get_dni())){
+                    viaje_existente = true;
+                    break;
+                }
+            }
+        }
+
+        if(!viaje_existente){
             RutaRepository rr = new RutaRepository();
             List<Ruta> rutas = rr.obtener_rutas();
             if(rutas == null){
                 return;
             }
-            ViajeRepository vr = new ViajeRepository();
+
             List<Viaje> viajes = vr.obtener_viajes();
 
             Ruta ruta_elegida = null;
@@ -128,6 +142,8 @@ public class MenuConductor {
 
                 vr.guardar_viaje(viaje);
                 conductor.set_viaje_actual(viaje);
+                ConductorRepository cr = new ConductorRepository();
+                cr.editar_conductor(conductor);
             }
         }
     }

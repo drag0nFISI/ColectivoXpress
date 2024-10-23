@@ -9,6 +9,7 @@ public class MenuPrincipal {
 
     public static void main(String[] args) {
         while (true) {
+            Consola.change_color(0, 7);
 
             int aux = 0;
             boolean permitido = false;
@@ -53,6 +54,7 @@ public class MenuPrincipal {
                     System.out.println("Opcion no valida");
                     break;
             }
+            Consola.reset_color();
         }
     }
 }
